@@ -301,12 +301,12 @@ export default function Home() {
               <strong>8 / 8 files · every run</strong>
             </div>
             <div className="score-row">
-              <span>Findings</span>
-              <strong>Same required findings · every run</strong>
+              <span>Output</span>
+              <strong>Consistent · every run</strong>
             </div>
             <p>
-              Observed medians on a bounded serial-control mechanism benchmark,
-              not a promise for every workload.
+              Observed medians on a bounded serial-control mechanism benchmark.
+              Expanded benchmarking encouraged.
             </p>
           </div>
         </div>
