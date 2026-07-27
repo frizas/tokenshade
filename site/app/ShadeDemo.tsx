@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element -- Local, pre-sized brand assets keep the static Sites build simple. */
 "use client";
 
 import { useState } from "react";
+import { sitePath } from "./sitePath";
 
 const states = {
   shaded: {
@@ -42,8 +44,8 @@ export function ShadeDemo() {
         <img
           src={
             shaded
-              ? "/tokenshade-generated-mark.png"
-              : "/tokenshade-unshaded.svg"
+              ? sitePath("/tokenshade-generated-mark.png")
+              : sitePath("/tokenshade-unshaded.svg")
           }
           width="1254"
           height="1254"

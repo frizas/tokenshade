@@ -1,12 +1,12 @@
 {
   "name": "tokenshade",
   "version": "0.1.0",
-  "description": "Stop the token burn on your plan.",
+  "description": "Stop the burn on your plan.",
   "author": {
-    "name": "Frizas",
+    "name": "frizas",
     "url": "https://github.com/frizas"
   },
-  "homepage": "https://github.com/frizas/tokenshade",
+  "homepage": "https://tokenshade.vercel.app",
   "repository": "https://github.com/frizas/tokenshade",
   "license": "MIT",
   "keywords": [
@@ -21,10 +21,10 @@
     "displayName": "TokenShade",
     "shortDescription": "Batch independent tools. Poll long work less.",
     "longDescription": "Installs a narrow Codex policy for grouping independent tool calls, audits aggregate local orchestration metrics, and runs reproducible before/after benchmarks.",
-    "developerName": "Frizas",
+    "developerName": "frizas",
     "category": "Productivity",
     "capabilities": [],
-    "websiteURL": "https://github.com/frizas/tokenshade",
+    "websiteURL": "https://tokenshade.vercel.app",
     "privacyPolicyURL": "https://github.com/frizas/tokenshade/blob/main/PRIVACY.md",
     "defaultPrompt": [
       "Install the TokenShade policy safely.",

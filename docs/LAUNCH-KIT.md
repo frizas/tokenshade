@@ -11,7 +11,7 @@ repetitive polling.
 
 Open source. No telemetry. A/B tested with a reproducible public fixture.
 
-https://github.com/frizas/tokenshade
+https://tokenshade.vercel.app
 
 ## X thread
 
@@ -36,8 +36,8 @@ https://github.com/frizas/tokenshade
    70,085 (71.2% fewer), with equivalent coverage and conclusions. This is a
    mechanism test, not a default-Sol comparison or universal promise.
 
-7. Repo, method, sanitized results, and portable Claude/Kimi prompts:
-   https://github.com/frizas/tokenshade
+7. Install, source, method, sanitized results, and portable Claude/Kimi prompts:
+   https://tokenshade.vercel.app
 
 ## Reddit / Hacker News
 
@@ -70,7 +70,7 @@ In the bounded serial-control mechanism benchmark, observed median model cycles
 fell from 8 to 1 and total tokens from 243,314 to 70,085. Those are
 workload-specific medians, not a universal savings promise.
 
-https://github.com/frizas/tokenshade
+https://tokenshade.vercel.app
 
 ## Product description
 

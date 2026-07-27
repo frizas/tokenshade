@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.19.0"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Validate TokenShade
+        run: |
+          npm test
+          npm run check
+          npm run benchmark -- --dry-run --json
+      - name: Install site dependencies
+        run: npm ci --prefix site --ignore-scripts --no-audit --no-fund
+      - name: Build and test site
+        run: npm test --prefix site
+      - name: Build Vercel static export
+        env:
+          VERCEL: "1"
+        run: npm run build:vercel --prefix site
+      - name: Package source and write checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir release
+          prefix="tokenshade-${GITHUB_REF_NAME}/"
+          git archive --format=zip --prefix="$prefix" \
+            --output="release/tokenshade-${GITHUB_REF_NAME}.zip" "$GITHUB_SHA"
+          git archive --format=tar.gz --prefix="$prefix" \
+            --output="release/tokenshade-${GITHUB_REF_NAME}.tar.gz" "$GITHUB_SHA"
+          (
+            cd release
+            sha256sum "tokenshade-${GITHUB_REF_NAME}.zip" \
+              "tokenshade-${GITHUB_REF_NAME}.tar.gz" > SHA256SUMS
+          )
+      - name: Sign build provenance
+        uses: actions/attest@v4
+        with:
+          subject-path: "release/*"
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" release/* \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "TokenShade $GITHUB_REF_NAME" \
+            --generate-notes \
+            --verify-tag

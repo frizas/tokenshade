@@ -13,12 +13,16 @@ function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     if (
       [
+        ".benchmark-work",
         ".git",
         ".next",
+        ".vercel",
         ".vinext",
         ".wrangler",
+        "coverage",
         "dist",
         "node_modules",
+        "out",
       ].includes(entry.name)
     ) {
       continue;
@@ -95,6 +99,11 @@ assert.deepEqual(
   fs.readFileSync(path.join(root, "site", "public", "llms.txt")),
   "repository and landing-page llms.txt copies diverged",
 );
+assert.equal(
+  productText.includes("tokenshade.fgfrizas.chatgpt.site"),
+  false,
+  "rejected preview hostname remains",
+);
 assert.match(
   fs.readFileSync(path.join(root, "llms.txt"), "utf8"),
   /Build me a TokenShade skill/,
@@ -104,6 +113,11 @@ assert.equal(
   fs.existsSync(path.join(root, "site", "public", "robots.txt")),
   true,
   "landing page is missing robots.txt",
+);
+assert.equal(
+  fs.existsSync(path.join(root, "site", "public", "sitemap.xml")),
+  true,
+  "landing page is missing sitemap.xml",
 );
 assert.deepEqual(
   fs.readFileSync(path.join(root, "AGENTS.md")),
@@ -179,12 +193,42 @@ const sitePackage = JSON.parse(
   fs.readFileSync(path.join(root, "site", "package.json"), "utf8"),
 );
 assert.equal(sitePackage.name, "tokenshade-site");
+assert.equal(
+  sitePackage.scripts["build:static"],
+  "node build/static-build.mjs",
+);
+assert.equal(sitePackage.scripts["build:vercel"], "npm run build:static");
+assert.equal(sitePackage.scripts["build:pages"], "npm run build:static");
 assert.equal(sitePackage.dependencies["react-loading-skeleton"], undefined);
 assert.equal(sitePackage.dependencies["drizzle-orm"], undefined);
+assert.equal(
+  fs.existsSync(path.join(root, "site", "tsconfig.static.json")),
+  true,
+  "static builds are missing their host-isolated TypeScript project",
+);
+assert.match(
+  fs.readFileSync(
+    path.join(root, "site", "build", "static-build.mjs"),
+    "utf8",
+  ),
+  /NEXT_TELEMETRY_DISABLED:\s*"1"/,
+  "static build telemetry is not disabled",
+);
+const vercelConfig = JSON.parse(
+  fs.readFileSync(path.join(root, "site", "vercel.json"), "utf8"),
+);
+assert.equal(vercelConfig.framework, null);
+assert.equal(vercelConfig.outputDirectory, "out");
+assert.match(
+  JSON.stringify(vercelConfig.headers),
+  /connect-src 'none'/,
+  "Vercel static host policy allows runtime connections",
+);
 const siteRuntime = [
   path.join(root, "site", "app", "page.tsx"),
   path.join(root, "site", "app", "CopyInstall.tsx"),
   path.join(root, "site", "app", "SharePrompt.tsx"),
+  path.join(root, "site", "app", "sitePath.ts"),
   path.join(root, "site", "app", "layout.tsx"),
 ].map((file) => fs.readFileSync(file, "utf8"));
 assert.equal(

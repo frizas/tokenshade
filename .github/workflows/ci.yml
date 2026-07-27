@@ -31,3 +31,7 @@ jobs:
         run: npm ci --prefix site --ignore-scripts --no-audit --no-fund
       - name: Build and test site
         run: npm test --prefix site
+      - name: Build Vercel static export
+        env:
+          VERCEL: "1"
+        run: npm run build:vercel --prefix site

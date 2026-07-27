@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 # AI-readable product context: /llms.txt
+Sitemap: https://tokenshade.vercel.app/sitemap.xml

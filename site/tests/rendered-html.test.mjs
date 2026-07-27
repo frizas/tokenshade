@@ -40,7 +40,7 @@ test("server-renders the TokenShade landing page", async () => {
   assert.match(html, /ONE-TWEET PROMPT/);
   assert.match(visibleText, /85%\+ fewer/);
   assert.match(visibleText, /70%\+ fewer/);
-  assert.match(visibleText, /279 \/ 280/);
+  assert.match(visibleText, /272 \/ 280/);
   assert.match(html, /Does TokenShade work with ChatGPT\?/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /ONE-TWEET PROMPT/);
@@ -92,6 +92,7 @@ test("keeps metadata, accessibility, and responsive contracts in source", async 
   assert.match(layout, /summary_large_image/);
   assert.match(layout, /ChatGPT Work/);
   assert.match(layout, /GPT-5\.6 Sol/);
+  assert.match(layout, /https:\/\/tokenshade\.vercel\.app/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(css, /\.prompt-card-actions/);

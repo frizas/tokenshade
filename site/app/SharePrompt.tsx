@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 
-const repositoryUrl = "https://github.com/frizas/tokenshade";
+const productUrl = "https://tokenshade.vercel.app";
+
+function currentPromptUrl(): string {
+  return new URL("#prompt", window.location.href).toString();
+}
 
 export function SharePrompt({ text }: { text: string }) {
   const [open, setOpen] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
-  const fallbackText = encodeURIComponent(`${text}\n\nTokenShade: ${repositoryUrl}`);
+  const fallbackText = encodeURIComponent(`${text}\n\nTokenShade: ${productUrl}`);
 
   async function share() {
     if (typeof navigator.share === "function") {
@@ -15,7 +19,7 @@ export function SharePrompt({ text }: { text: string }) {
         await navigator.share({
           title: "TokenShade",
           text,
-          url: `${window.location.origin}/#prompt`,
+          url: currentPromptUrl(),
         });
         return;
       } catch (error) {
@@ -26,7 +30,7 @@ export function SharePrompt({ text }: { text: string }) {
   }
 
   async function copyLink() {
-    await navigator.clipboard.writeText(`${window.location.origin}/#prompt`);
+    await navigator.clipboard.writeText(currentPromptUrl());
     setLinkCopied(true);
     window.setTimeout(() => setLinkCopied(false), 1800);
   }

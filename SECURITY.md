@@ -25,6 +25,19 @@ exploit that has not been remediated.
 Instruction policies shape model behavior; they are not a security boundary.
 Keep host sandboxes, permissions, approval gates, and normal review enabled.
 
+## Verify a release
+
+Tagged source archives ship with `SHA256SUMS` and signed GitHub/Sigstore build
+provenance. After downloading a release:
+
+```text
+gh attestation verify tokenshade-v0.1.0.zip --repo frizas/tokenshade
+gh attestation verify tokenshade-v0.1.0.tar.gz --repo frizas/tokenshade
+```
+
+On Linux or macOS, run `sha256sum -c SHA256SUMS`. On Windows, compare
+`Get-FileHash -Algorithm SHA256` output with `SHA256SUMS`.
+
 ## Threat model limits
 
 TokenShade does not protect a compromised operating system, Node runtime,

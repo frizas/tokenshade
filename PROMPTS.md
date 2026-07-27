@@ -26,7 +26,7 @@ to merge into an existing agent policy.
 ## One-tweet skill bootstrap
 
 ```text
-Build me a TokenShade skill from https://github.com/frizas/tokenshade. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.
+Build me a TokenShade skill from https://tokenshade.vercel.app. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.
 ```
 
 ## One-session activation for ChatGPT Work or another coding agent

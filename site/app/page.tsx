@@ -1,12 +1,14 @@
+/* eslint-disable @next/next/no-img-element -- Local, pre-sized brand assets keep the static Sites build simple. */
 import { CopyInstall } from "./CopyInstall";
 import { SharePrompt } from "./SharePrompt";
 import { ShadeDemo } from "./ShadeDemo";
+import { sitePath } from "./sitePath";
 
 const installCommands = `codex plugin marketplace add frizas/tokenshade
 codex plugin add tokenshade@tokenshade`;
 
 const tweetPrompt =
-  "Build me a TokenShade skill from https://github.com/frizas/tokenshade. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.";
+  "Build me a TokenShade skill from https://tokenshade.vercel.app. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.";
 
 const agents = [
   {
@@ -66,6 +68,7 @@ const structuredData = {
       softwareRequirements: "Node.js 20+ or OpenAI Codex",
       description:
         "An open-source orchestration policy and prompt for ChatGPT Work, OpenAI Codex, and portable AI coding agent workflows.",
+      url: "https://tokenshade.vercel.app",
       isAccessibleForFree: true,
       license: "https://opensource.org/license/mit",
       sameAs: "https://github.com/frizas/tokenshade",
@@ -105,7 +108,7 @@ export default function Home() {
 
       <header className="shell nav">
         <a className="brand" href="#top" aria-label="TokenShade home">
-          <img src="/tokenshade-mark.svg" width="42" height="42" alt="" />
+          <img src={sitePath("/tokenshade-mark.svg")} width="42" height="42" alt="" />
           <span>TokenShade</span>
         </a>
         <nav aria-label="Main navigation">
@@ -374,7 +377,7 @@ export default function Home() {
             <SharePrompt text={tweetPrompt} />
           </div>
           <div className="skill-links">
-            <a href="/llms.txt">Read llms.txt →</a>
+            <a href={sitePath("/llms.txt")}>Read llms.txt →</a>
             <a href="https://github.com/frizas/tokenshade/blob/main/PROMPTS.md">
               Full prompt pack →
             </a>
@@ -417,7 +420,7 @@ export default function Home() {
       <footer>
         <div className="shell footer-grid">
           <div className="brand footer-brand">
-            <img src="/tokenshade-mark.svg" width="42" height="42" alt="" />
+            <img src={sitePath("/tokenshade-mark.svg")} width="42" height="42" alt="" />
             <span>TokenShade</span>
           </div>
           <p>

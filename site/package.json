@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": ">=22.13.0"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:static": "node build/static-build.mjs",
+    "build:vercel": "npm run build:static",
+    "build:pages": "npm run build:static",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next"
