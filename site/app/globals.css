@@ -817,8 +817,8 @@ h3 {
 
 .compact {
   display: grid;
-  grid-template-columns: 0.65fr 1.35fr;
-  column-gap: 60px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  column-gap: 50px;
 }
 
 .compact .eyebrow {
@@ -827,6 +827,17 @@ h3 {
 
 .compact .section-copy {
   margin: 0;
+}
+
+@media (min-width: 901px) {
+  .compact h2 {
+    font-size: clamp(54px, 6vw, 68px);
+  }
+
+  .compact h2 span {
+    display: block;
+    white-space: nowrap;
+  }
 }
 
 .agent-table {
@@ -1129,29 +1140,14 @@ footer {
 
 .footer-grid p {
   margin: 0;
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 12px;
   color: var(--paper);
   text-align: center;
   font-size: 13px;
 }
 
-.footer-grid p a {
-  flex: none;
-  color: var(--paper);
-  font: 700 11px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
-  opacity: 0.72;
-  text-underline-offset: 4px;
-}
-
-.footer-grid p a:hover {
-  opacity: 1;
-}
-
 .footer-links {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   gap: 24px;
 }
@@ -1167,6 +1163,15 @@ footer {
     background-color 140ms ease,
     color 140ms ease,
     transform 140ms ease;
+}
+
+.footer-links .footer-legal {
+  width: auto;
+  padding-inline: 8px;
+  font: 700 11px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
+  opacity: 0.72;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .footer-links a:hover {
@@ -1353,14 +1358,7 @@ footer {
   }
 
   .footer-grid p {
-    justify-content: flex-start;
-    gap: 8px;
     text-align: left;
-    font-size: clamp(11px, 3.4vw, 13px);
-  }
-
-  .footer-grid p a {
-    font-size: 10px;
   }
 
   .footer-links {

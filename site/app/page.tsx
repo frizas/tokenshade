@@ -272,10 +272,9 @@ export default function Home() {
             <p className="eyebrow">Honest numbers</p>
             <h2 id="proof-heading">A claim you can rerun.</h2>
             <p>
-              Across five matched GPT-5.6 Sol/xhigh pairs on one bounded
-              eight-file mechanism test, TokenShade cut median model cycles by
-              85%+ and median total tokens by 70%+—with the same coverage and
-              conclusions in every run.
+              Five matched GPT-5.6 Sol/xhigh pairs showed the same pattern:
+              less orchestration overhead, full file coverage, and the same
+              required findings. The exact medians are in the scorecard.
             </p>
             <a
               href="https://github.com/frizas/tokenshade/blob/main/docs/HONEST-NUMBERS.md"
@@ -291,19 +290,19 @@ export default function Home() {
             </div>
             <div className="score-row">
               <span>Model cycles</span>
-              <strong data-benchmark="cycles">85%+ fewer</strong>
+              <strong data-benchmark="cycles">≥ 85% fewer</strong>
             </div>
             <div className="score-row">
               <span>Total tokens</span>
-              <strong data-benchmark="tokens">70%+ fewer</strong>
+              <strong data-benchmark="tokens">≥ 70% fewer</strong>
             </div>
             <div className="score-row">
               <span>Coverage</span>
               <strong>8 / 8 files · every run</strong>
             </div>
             <div className="score-row">
-              <span>Conclusions</span>
-              <strong>Equivalent · every run</strong>
+              <span>Findings</span>
+              <strong>Same required findings · every run</strong>
             </div>
             <p>
               Observed medians on a bounded serial-control mechanism benchmark,
@@ -349,11 +348,13 @@ export default function Home() {
         <div className="shell">
           <div className="section-heading compact">
             <p className="eyebrow">Bring your own agent</p>
-            <h2 id="compatibility-heading">Codex-first. Agent-portable.</h2>
+            <h2 id="compatibility-heading">
+              <span>Codex-first.</span>{" "}
+              <span>Agent-portable.</span>
+            </h2>
             <p className="section-copy">
-              The measured claim is Codex-only. Portable instruction adapters
-              are included for other agents and are labeled honestly until
-              separately benchmarked.
+              The measured claim is Codex-only. Portable adapters are included
+              for other agents and should be benchmarked separately.
             </p>
           </div>
           <div className="agent-table">
@@ -484,17 +485,16 @@ export default function Home() {
             <span>TokenShade</span>
           </div>
           <p>
-            <span>
-              Proudly made with AI by <strong>HiLeverage Studios</strong>
-            </span>
+            Proudly made with AI by <strong>HiLeverage Studios</strong>
+          </p>
+          <div className="footer-links">
             <a
+              className="footer-legal"
               href="https://github.com/frizas/tokenshade/blob/main/PRIVACY.md"
               data-analytics-event="ts_privacy"
             >
               Privacy
             </a>
-          </p>
-          <div className="footer-links">
             <a
               href="https://x.com/frizas"
               aria-label="frizas on X"

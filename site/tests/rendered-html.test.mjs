@@ -37,8 +37,8 @@ test("server-renders the TokenShade landing page", async () => {
   assert.match(html, /or plugin tracking/);
   assert.match(html, /not affiliated with OpenAI/);
   assert.match(html, /ONE-TWEET PROMPT/);
-  assert.match(visibleText, /85%\+ fewer/);
-  assert.match(visibleText, /70%\+ fewer/);
+  assert.match(visibleText, /≥ 85% fewer/);
+  assert.match(visibleText, /≥ 70% fewer/);
   assert.match(visibleText, /263 \/ 280/);
   assert.match(html, /Does TokenShade work with ChatGPT\?/);
   assert.match(html, /application\/ld\+json/);
