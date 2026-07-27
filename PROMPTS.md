@@ -23,6 +23,12 @@ to merge into an existing agent policy.
 - Give long commands a meaningful initial wait. If a command remains active, resume at intervals appropriate to the expected runtime; do not spend model turns on rapid polling.
 ```
 
+## One-tweet skill bootstrap
+
+```text
+Build me a TokenShade skill from https://github.com/frizas/tokenshade. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.
+```
+
 ## One-session activation for ChatGPT Work or another coding agent
 
 ```text

@@ -98,8 +98,19 @@ node plugins/tokenshade/scripts/tokenshade.mjs uninstall --json
 
 ## Honest numbers
 
-TokenShade publishes only measured, workload-specific medians. The release
-gate requires:
+The five-pair public release benchmark passed:
+
+| Metric | Serial control median | TokenShade median | Change |
+|---|---:|---:|---:|
+| Model cycles | 8 | 1 | 87.5% fewer |
+| Total tokens | 243,314 | 70,085 | 71.2% fewer |
+| Fixture coverage | 8 / 8 every run | 8 / 8 every run | Equivalent |
+
+![TokenShade public benchmark result](./assets/benchmark-result-card.png)
+
+Every treatment run genuinely grouped all eight reads, every run reached the
+same three conclusions, and no run polled or expanded scope. TokenShade
+publishes only measured, workload-specific medians. The release gate required:
 
 - at least 30% fewer median model cycles;
 - at least 20% fewer median total tokens;
@@ -111,7 +122,7 @@ The fixture, prompt, expected findings, sanitized run metrics, environment
 versions, hashes, and reproduction command are committed. See
 [Honest Numbers](./docs/HONEST-NUMBERS.md).
 
-The public fixture is a serial-control/TokenShade mechanism test, not an
+The passing public fixture is a serial-control/TokenShade mechanism test, not an
 organic-workload simulator or comparison against default Sol. The task prompt
 is identical in both phases; the harness swaps only the temporary global
 staging policy. An unguided preflight was neutral on median cycles because Sol

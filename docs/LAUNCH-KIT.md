@@ -1,6 +1,6 @@
 # Launch kit
 
-Replace bracketed benchmark values only with the committed public scorecard.
+All benchmark language below is bound to the committed public scorecard.
 
 ## Short X post
 
@@ -31,9 +31,10 @@ https://github.com/frizas/tokenshade
 5. No telemetry, backend, hooks, MCP server, credential reads, or runtime
    network client.
 
-6. The public benchmark is five matched Sol/XHigh serial-control/TokenShade
-   pairs on a fixed eight-file fixture. Observed median: [PUBLIC SCORECARD].
-   This is a mechanism test, not a default-Sol comparison or universal promise.
+6. In five matched Sol/XHigh serial-control/TokenShade pairs, median model
+   cycles fell from 8 to 1 (87.5% fewer) and total tokens from 243,314 to
+   70,085 (71.2% fewer), with equivalent coverage and conclusions. This is a
+   mechanism test, not a default-Sol comparison or universal promise.
 
 7. Repo, method, sanitized results, and portable Claude/Kimi prompts:
    https://github.com/frizas/tokenshade
@@ -45,7 +46,9 @@ https://github.com/frizas/tokenshade
 TokenShade addresses a narrow orchestration issue: independent tool calls can be
 serialized across full model cycles, and long commands can be polled too often.
 It installs three compact behavioral rules, preserves existing instructions,
-and includes a reproducible matched benchmark.
+and includes a reproducible matched benchmark. In its five-pair
+serial-control mechanism test, observed median model cycles fell 87.5% and
+total tokens fell 71.2%, with equivalent coverage and conclusions.
 
 It is dependency-free at runtime, MIT licensed, and has no telemetry, backend,
 hooks, or MCP server. The benchmark claim is explicitly workload-specific.
@@ -62,6 +65,10 @@ dependent and risky work stays sequential.
 The repository includes a safe marker installer, privacy-preserving local audit,
 reproducible five-pair benchmark, honest limitations, and portable instructions
 for Claude Code and Kimi Code CLI.
+
+In the bounded serial-control mechanism benchmark, observed median model cycles
+fell from 8 to 1 and total tokens from 243,314 to 70,085. Those are
+workload-specific medians, not a universal savings promise.
 
 https://github.com/frizas/tokenshade
 

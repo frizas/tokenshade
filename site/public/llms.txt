@@ -11,7 +11,7 @@ tools have nothing to batch; the benchmark claim is Codex-only.
 
 ## One-tweet prompt
 
-Batch 2+ independent, already-known tool calls in one concurrent stage; inspect every result. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. For long commands, wait meaningfully before polling. Never invent work just to batch.
+Build me a TokenShade skill from https://github.com/frizas/tokenshade. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.
 
 ## Canonical resources
 

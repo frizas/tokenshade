@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "command": "summarize",
+  "evidence": "observed-workload-specific",
+  "runs": {
+    "baseline": 5,
+    "treatment": 5
+  },
+  "aggregate": {
+    "baseline": {
+      "runs": 5,
+      "medianModelCycles": 8,
+      "medianInputTokens": 241514,
+      "medianCachedInputTokens": 209664,
+      "medianOutputTokens": 1861,
+      "medianTotalTokens": 243314,
+      "medianToolCalls": 8,
+      "medianToolCallsPerOuterStage": 1,
+      "medianMaxGroupedOperations": 1,
+      "allCoverageComplete": true,
+      "allConclusionsComplete": true,
+      "allGenuinelyGrouped": false,
+      "allControlCompliant": true,
+      "allNoExtraScope": true,
+      "totalPollingCalls": 0
+    },
+    "treatment": {
+      "runs": 5,
+      "medianModelCycles": 1,
+      "medianInputTokens": 68740,
+      "medianCachedInputTokens": 41472,
+      "medianOutputTokens": 1359,
+      "medianTotalTokens": 70085,
+      "medianToolCalls": 1,
+      "medianToolCallsPerOuterStage": 1,
+      "medianMaxGroupedOperations": 8,
+      "allCoverageComplete": true,
+      "allConclusionsComplete": true,
+      "allGenuinelyGrouped": true,
+      "allControlCompliant": true,
+      "allNoExtraScope": true,
+      "totalPollingCalls": 0
+    },
+    "reductions": {
+      "modelCyclesPercent": 87.5,
+      "totalTokensPercent": 71.2
+    }
+  },
+  "gate": {
+    "modelCyclesAtLeast30Percent": true,
+    "totalTokensAtLeast20Percent": true,
+    "completeCoverage": true,
+    "equivalentConclusions": true,
+    "serialControlEveryBaseline": true,
+    "genuineGroupingEveryTreatment": true,
+    "noTreatmentPolling": true,
+    "noExtraScopeEveryRun": true,
+    "passed": true
+  },
+  "metadata": {
+    "fixtureCommit": "d167aad4b92de2ae0b276d22f2535f383665b4de",
+    "fixtureTreeSha256": "e107c4b3b5c46829b0b4f8f1217fa245459fe70c8213c9d2e9b06db8a3225175",
+    "promptSha256": "7d77d1874aa34ac22b59497d84733174bccf0e9f15cbf33120bae6666fbeb267",
+    "policySha256": "16a4247a8ea35bd069f2078c9ba9f3b2d45be235850829fff6220473987b72a9",
+    "codexVersion": "codex-cli 0.144.1",
+    "nodeVersion": "v22.22.2",
+    "platform": "win32-x64",
+    "model": "gpt-5.6-sol",
+    "reasoningEffort": "xhigh"
+  }
+}

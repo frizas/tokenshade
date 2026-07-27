@@ -31,12 +31,16 @@ test("server-renders the TokenShade landing page", async () => {
   assert.match(html, /<title>TokenShade/);
   const visibleText = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   assert.match(visibleText, /Stop the burn on your plan\./);
+  assert.match(visibleText, /Free forever · No tracking · Open source/);
   assert.match(html, /Install in 60 seconds/);
   assert.match(html, /frizas\/tokenshade/);
-  assert.match(html, /No telemetry/);
+  assert.match(html, /No tracking/);
+  assert.match(html, /or telemetry/);
   assert.match(html, /not affiliated with OpenAI/);
   assert.match(html, /ONE-TWEET PROMPT/);
-  assert.match(visibleText, /273 \/ 280/);
+  assert.match(visibleText, /85%\+ fewer/);
+  assert.match(visibleText, /70%\+ fewer/);
+  assert.match(visibleText, /279 \/ 280/);
   assert.match(html, /Does TokenShade work with ChatGPT\?/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /ONE-TWEET PROMPT/);
@@ -69,6 +73,8 @@ test("keeps metadata, accessibility, and responsive contracts in source", async 
   assert.match(page, /https:\/\/www\.manapanic\.com\//);
   assert.match(page, /https:\/\/accounts\.manapanic\.com\/billing/);
   assert.match(page, /const tweetPrompt/);
+  assert.match(page, /Do it yourself/);
+  assert.doesNotMatch(page, /name: "ChatGPT Work"/);
   assert.match(page, /Read llms\.txt/);
   assert.match(page, /<SharePrompt text=\{tweetPrompt\}/);
   assert.match(sharePrompt, /navigator\.share/);

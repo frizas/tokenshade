@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">TokenShade public benchmark result</title>
+  <desc id="desc">A/B result card showing 85 percent plus fewer model cycles and 70 percent plus fewer total tokens.</desc>
+  <rect width="1080" height="1080" fill="#ff6b4a"/>
+  <rect x="28" y="28" width="1024" height="1024" fill="#fff6e9" stroke="#101820" stroke-width="8"/>
+  <rect x="28" y="28" width="1024" height="126" fill="#101820"/>
+
+  <g fill="#fff6e9">
+    <text x="78" y="83" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900">TokenShade</text>
+    <text x="1002" y="83" text-anchor="end" font-family="Consolas, monospace" font-size="18" font-weight="700" letter-spacing="2">PUBLIC BENCHMARK · PASS</text>
+    <text x="1002" y="119" text-anchor="end" font-family="Consolas, monospace" font-size="15" font-weight="700">5 MATCHED SOL/XHIGH PAIRS</text>
+  </g>
+
+  <g fill="#101820">
+    <text x="78" y="244" font-family="Consolas, monospace" font-size="20" font-weight="700" letter-spacing="2">THE SHADE HELD.</text>
+    <text x="78" y="342" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="-4">Same work.</text>
+    <text x="78" y="420" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="-4">Fewer turns.</text>
+
+    <rect x="78" y="496" width="924" height="188" fill="#ff6b4a" stroke="#101820" stroke-width="5"/>
+    <path d="M540 496v188" stroke="#101820" stroke-width="5"/>
+    <text x="116" y="548" font-family="Consolas, monospace" font-size="18" font-weight="700" letter-spacing="1">MODEL CYCLES</text>
+    <text x="116" y="638" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="900" letter-spacing="-1">85%+ fewer</text>
+    <text x="578" y="548" font-family="Consolas, monospace" font-size="18" font-weight="700" letter-spacing="1">TOTAL TOKENS</text>
+    <text x="578" y="638" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="900" letter-spacing="-1">70%+ fewer</text>
+
+    <text x="78" y="758" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800">8/8 files. Equivalent conclusions. Zero polling.</text>
+    <path d="M78 802h924" stroke="#101820" stroke-width="4"/>
+    <text x="78" y="855" font-family="Arial, Helvetica, sans-serif" font-size="22">Observed medians on a bounded serial-control mechanism benchmark.</text>
+    <text x="78" y="891" font-family="Arial, Helvetica, sans-serif" font-size="22">Not a universal token-savings promise.</text>
+    <text x="78" y="980" font-family="Consolas, monospace" font-size="18" font-weight="700">EXACT RESULT: 87.5% FEWER CYCLES · 71.2% FEWER TOTAL TOKENS</text>
+    <text x="1002" y="980" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800">frizas/tokenshade</text>
+  </g>
+</svg>

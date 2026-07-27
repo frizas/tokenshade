@@ -1,0 +1,57 @@
+{
+  "kind": "tokenshade-benchmark-run",
+  "schemaVersion": 1,
+  "pair": 4,
+  "phase": "baseline",
+  "model": "gpt-5.6-sol",
+  "reasoningEffort": "xhigh",
+  "sandbox": "read-only",
+  "durationMs": 62852,
+  "fixtureCommit": "d167aad4b92de2ae0b276d22f2535f383665b4de",
+  "fixtureTreeSha256": "e107c4b3b5c46829b0b4f8f1217fa245459fe70c8213c9d2e9b06db8a3225175",
+  "promptSha256": "7d77d1874aa34ac22b59497d84733174bccf0e9f15cbf33120bae6666fbeb267",
+  "policySha256": "16a4247a8ea35bd069f2078c9ba9f3b2d45be235850829fff6220473987b72a9",
+  "codexVersion": "codex-cli 0.144.1",
+  "nodeVersion": "v22.22.2",
+  "platform": "win32-x64",
+  "activePolicySha256": "29e2ca0c3f1e45c07104b1cd984ead57d6270b6bfe7800da65bb8726e100c8df",
+  "tokenShadePolicyActive": false,
+  "metrics": {
+    "modelCycles": 8,
+    "inputTokens": 241350,
+    "cachedInputTokens": 209664,
+    "outputTokens": 1964,
+    "reasoningOutputTokens": 941,
+    "totalTokens": 243314,
+    "toolCalls": 8,
+    "toolCallsPerOuterStage": 1,
+    "maxGroupedOperations": 1,
+    "pollingCalls": 0
+  },
+  "validation": {
+    "coverageComplete": true,
+    "tableRows": 8,
+    "findingCount": 3,
+    "conclusionChecks": [
+      {
+        "id": "product-boundary",
+        "findingIndex": 1,
+        "matched": true
+      },
+      {
+        "id": "mobile-install-gap",
+        "findingIndex": 2,
+        "matched": true
+      },
+      {
+        "id": "mobile-buffer-portability",
+        "findingIndex": 3,
+        "matched": true
+      }
+    ],
+    "conclusionsComplete": true,
+    "genuineGrouping": false,
+    "extraScopeDetected": false,
+    "controlCompliant": true
+  }
+}

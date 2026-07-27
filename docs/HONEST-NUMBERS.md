@@ -57,6 +57,23 @@ is retained at `benchmarks/preflight/unguided-sol-xhigh.json`.
 The authoritative release results live in `benchmarks/results/aggregate.json`,
 with the human scorecard in `benchmarks/results/SCORECARD.md`.
 
+## Observed release result
+
+All five matched pairs passed:
+
+| Metric | Serial control median | TokenShade median | Change |
+|---|---:|---:|---:|
+| Model cycles | 8 | 1 | 87.5% fewer |
+| Input tokens | 241,514 | 68,740 | workload observation |
+| Cached input tokens | 209,664 | 41,472 | workload observation |
+| Output tokens | 1,861 | 1,359 | workload observation |
+| Total tokens | 243,314 | 70,085 | 71.2% fewer |
+| Max grouped operations | 1 | 8 | staging observation |
+
+Every run covered all eight files, reached the same three expected conclusions,
+avoided extra scope, and made zero polling calls. Every baseline followed the
+eight-call serial control, and every treatment grouped all eight operations.
+
 ## Token accounting
 
 `totalTokens` is `input_tokens + output_tokens`. Cached input is already part of

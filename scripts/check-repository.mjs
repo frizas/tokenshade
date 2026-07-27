@@ -97,7 +97,7 @@ assert.deepEqual(
 );
 assert.match(
   fs.readFileSync(path.join(root, "llms.txt"), "utf8"),
-  /Batch 2\+ independent, already-known tool calls/,
+  /Build me a TokenShade skill/,
   "llms.txt is missing the one-tweet prompt",
 );
 assert.equal(

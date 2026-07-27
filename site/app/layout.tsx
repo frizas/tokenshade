@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 
-const title = "TokenShade for ChatGPT Work & Codex";
+const title = "TokenShade for OpenAI Codex";
 const description =
   "Stop the burn on your plan. TokenShade helps AI coding agents batch independent tools and avoid repetitive polling.";
 

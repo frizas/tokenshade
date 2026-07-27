@@ -6,18 +6,13 @@ const installCommands = `codex plugin marketplace add frizas/tokenshade
 codex plugin add tokenshade@tokenshade`;
 
 const tweetPrompt =
-  "Batch 2+ independent, already-known tool calls in one concurrent stage; inspect every result. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. For long commands, wait meaningfully before polling. Never invent work just to batch.";
+  "Build me a TokenShade skill from https://github.com/frizas/tokenshade. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.";
 
 const agents = [
   {
     name: "OpenAI Codex",
     support: "Native plugin + AGENTS.md",
     state: "Benchmarked",
-  },
-  {
-    name: "ChatGPT Work",
-    support: "One-session prompt",
-    state: "Compatible",
   },
   {
     name: "Kimi Code CLI",
@@ -101,11 +96,11 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="notice">
-        <span>Independent open source</span>
+        <span>Free forever</span>
         <span aria-hidden="true">·</span>
-        <span>No telemetry</span>
+        <span>No tracking</span>
         <span aria-hidden="true">·</span>
-        <span>MIT licensed</span>
+        <span>Open source</span>
       </div>
 
       <header className="shell nav">
@@ -150,7 +145,7 @@ export default function Home() {
             </a>
           </div>
           <p className="fine-print">
-            For OpenAI Codex. Independent and not affiliated with OpenAI.
+            For Codex or ChatGPT Work. Independent and not affiliated with OpenAI.
           </p>
         </div>
 
@@ -226,81 +221,44 @@ export default function Home() {
         </ol>
       </section>
 
-      <section className="prompt-section" id="prompt" aria-labelledby="prompt-heading">
-        <div className="shell prompt-grid">
-          <div className="prompt-intro">
-            <p className="eyebrow">Open prompt</p>
-            <h2 id="prompt-heading">Copy the idea. Try it anywhere.</h2>
-            <p>
-              Want to test the behavior before installing anything? Paste this
-              agent-neutral prompt into one session. The durable plugin adds
-              safe updates, backups, audits, and reproducible benchmarks.
-            </p>
-            <div className="prompt-links">
-              <a href="/llms.txt">Read llms.txt →</a>
-              <a href="https://github.com/frizas/tokenshade/blob/main/PROMPTS.md">
-                Full prompt pack →
-              </a>
-            </div>
-          </div>
-          <div className="prompt-card" aria-label="One-tweet TokenShade prompt">
-            <div className="prompt-card-top">
-              <span>ONE-TWEET PROMPT</span>
-              <strong>{tweetPrompt.length} / 280</strong>
-            </div>
-            <blockquote>{tweetPrompt}</blockquote>
-            <div className="prompt-card-actions">
-              <CopyInstall
-                text={tweetPrompt}
-                label="Copy prompt"
-                className="prompt-copy-button"
-                clipboardIcon
-              />
-              <SharePrompt text={tweetPrompt} />
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="proof" id="proof" aria-labelledby="proof-heading">
         <div className="shell proof-grid">
           <div className="proof-copy">
             <p className="eyebrow">Honest numbers</p>
             <h2 id="proof-heading">A claim you can rerun.</h2>
             <p>
-              The release benchmark uses five matched serial-control/TokenShade
-              pairs, the same Sol model and XHigh effort, a fixed eight-file
-              public fixture, exact coverage requirements, and committed
-              sanitized run metrics.
+              Across five matched Sol/XHigh pairs, grouping eight known reads
+              in one stage cut median model cycles by 85%+ and median total
+              tokens by 70%+—with the same eight-file coverage and conclusions.
             </p>
             <a href="https://github.com/frizas/tokenshade/blob/main/docs/HONEST-NUMBERS.md">
               Read the method and limitations →
             </a>
           </div>
-          <div className="scorecard" aria-label="TokenShade benchmark release gate">
+          <div className="scorecard" aria-label="TokenShade public benchmark result">
             <div className="scorecard-top">
-              <span>PUBLIC RELEASE GATE</span>
-              <strong>5 × A/B pairs</strong>
+              <span>PUBLIC BENCHMARK · PASS</span>
+              <strong>5 matched pairs</strong>
             </div>
             <div className="score-row">
               <span>Model cycles</span>
-              <strong data-benchmark="cycles">≥30% fewer required</strong>
+              <strong data-benchmark="cycles">85%+ fewer</strong>
             </div>
             <div className="score-row">
               <span>Total tokens</span>
-              <strong data-benchmark="tokens">≥20% fewer required</strong>
+              <strong data-benchmark="tokens">70%+ fewer</strong>
             </div>
             <div className="score-row">
               <span>Coverage</span>
-              <strong>8 / 8 files required</strong>
+              <strong>8 / 8 files · every run</strong>
             </div>
             <div className="score-row">
               <span>Conclusions</span>
-              <strong>Equivalent required</strong>
+              <strong>Equivalent · every run</strong>
             </div>
             <p>
-              Claims ship only after the public gate passes—no extrapolation,
-              no estimates dressed up as usage.
+              Observed medians on a bounded serial-control mechanism benchmark,
+              not a promise for every workload.
             </p>
           </div>
         </div>
@@ -358,24 +316,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="shell faq" id="faq" aria-labelledby="faq-heading">
-        <div className="section-heading">
-          <p className="eyebrow">Straight answers</p>
-          <h2 id="faq-heading">Before you put on the shades.</h2>
-        </div>
-        <div className="faq-list">
-          {faqs.map((faq) => (
-            <details key={faq.question}>
-              <summary>
-                <span>{faq.question}</span>
-                <i aria-hidden="true">+</i>
-              </summary>
-              <p>{faq.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-
       <section className="shell limits" aria-labelledby="limits-heading">
         <div>
           <p className="eyebrow">Where shade helps</p>
@@ -388,6 +328,58 @@ export default function Home() {
           already run concurrently. It does not shrink your prompt, compress
           output, or make a weaker model choice for you.
         </p>
+      </section>
+
+      <section className="shell secondary-resources" aria-label="Secondary resources">
+        <section className="secondary-card faq-card" id="faq" aria-labelledby="faq-heading">
+          <div className="secondary-heading">
+            <p className="eyebrow">Quick FAQ</p>
+            <h2 id="faq-heading">A few straight answers.</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>
+                  <span>{faq.question}</span>
+                  <i aria-hidden="true">+</i>
+                </summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="secondary-card skill-card" id="prompt" aria-labelledby="prompt-heading">
+          <div className="secondary-heading">
+            <p className="eyebrow">Alternative path</p>
+            <h2 id="prompt-heading">Do it yourself.</h2>
+            <p>
+              The plugin is the recommended path, but you don&apos;t need us! If
+              you prefer an internal skill, here&apos;s a one-tweet prompt you
+              can paste into your own agent and go wild. Have fun building!
+            </p>
+          </div>
+          <div className="skill-prompt-meta">
+            <span>ONE-TWEET PROMPT</span>
+            <strong>{tweetPrompt.length} / 280</strong>
+          </div>
+          <blockquote>{tweetPrompt}</blockquote>
+          <div className="prompt-card-actions">
+            <CopyInstall
+              text={tweetPrompt}
+              label="Copy prompt"
+              className="prompt-copy-button"
+              clipboardIcon
+            />
+            <SharePrompt text={tweetPrompt} />
+          </div>
+          <div className="skill-links">
+            <a href="/llms.txt">Read llms.txt →</a>
+            <a href="https://github.com/frizas/tokenshade/blob/main/PROMPTS.md">
+              Full prompt pack →
+            </a>
+          </div>
+        </section>
       </section>
 
       <aside
@@ -414,7 +406,7 @@ export default function Home() {
               rel="noreferrer"
             >
               <span className="studio-link-label">
-                <span>+ throw us a coin</span>
+                <span>+ throw us a coin (and get in-game rewards)</span>
                 <span aria-hidden="true">↗</span>
               </span>
             </a>
