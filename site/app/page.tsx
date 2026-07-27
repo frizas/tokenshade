@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- Local, pre-sized brand assets keep the static Sites build simple. */
 import { CopyInstall } from "./CopyInstall";
+import { SiteAnalytics } from "./SiteAnalytics";
 import { SharePrompt } from "./SharePrompt";
 import { ShadeDemo } from "./ShadeDemo";
 import { sitePath } from "./sitePath";
@@ -17,13 +18,13 @@ const agents = [
     state: "Benchmarked",
   },
   {
-    name: "Kimi Code CLI",
-    support: "Portable AGENTS.md",
+    name: "Claude Code",
+    support: "CLAUDE.md adapter",
     state: "Compatible",
   },
   {
-    name: "Claude Code",
-    support: "CLAUDE.md adapter",
+    name: "Kimi Code CLI",
+    support: "Portable AGENTS.md",
     state: "Compatible",
   },
   {
@@ -60,21 +61,52 @@ const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://tokenshade.vercel.app/#website",
+      name: "TokenShade",
+      alternateName: ["TokenShade for Codex", "TokenShade for ChatGPT Work"],
+      url: "https://tokenshade.vercel.app",
+      description:
+        "A free, open-source orchestration tool for Codex, ChatGPT Work, and portable AI coding-agent workflows.",
+      inLanguage: "en",
+    },
+    {
       "@type": "SoftwareApplication",
+      "@id": "https://tokenshade.vercel.app/#software",
       name: "TokenShade",
       applicationCategory: "DeveloperApplication",
       applicationSubCategory: "AI coding agent workflow tool",
       operatingSystem: "Windows, macOS, Linux",
       softwareRequirements: "Node.js 20+ or OpenAI Codex",
+      softwareVersion: "0.1.0",
       description:
-        "An open-source orchestration policy and prompt for ChatGPT Work, OpenAI Codex, and portable AI coding agent workflows.",
+        "A free, open-source orchestration policy that helps coding agents batch independent tools and avoid repetitive polling.",
       url: "https://tokenshade.vercel.app",
       isAccessibleForFree: true,
       license: "https://opensource.org/license/mit",
-      sameAs: "https://github.com/frizas/tokenshade",
+      downloadUrl: "https://github.com/frizas/tokenshade",
+      sameAs: [
+        "https://github.com/frizas/tokenshade",
+        "https://frizas.github.io/tokenshade/",
+      ],
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+      featureList: [
+        "Safe batching policy for independent tool calls",
+        "Meaningful polling cadence for long-running commands",
+        "Idempotent install, status, update, and uninstall",
+        "Local aggregate session audit",
+        "Reproducible before-and-after benchmark",
+      ],
       author: {
         "@type": "Organization",
         name: "HiLeverage Studios",
+      },
+      isPartOf: {
+        "@id": "https://tokenshade.vercel.app/#website",
       },
     },
     {
@@ -98,10 +130,11 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      <SiteAnalytics />
       <div className="notice">
         <span>Free forever</span>
         <span aria-hidden="true">·</span>
-        <span>No tracking</span>
+        <span>No plugin tracking</span>
         <span aria-hidden="true">·</span>
         <span>Open source</span>
       </div>
@@ -118,6 +151,7 @@ export default function Home() {
           <a
             className="nav-github"
             href="https://github.com/frizas/tokenshade"
+            data-analytics-event="ts_github_nav"
           >
             GitHub
           </a>
@@ -132,17 +166,22 @@ export default function Home() {
             <span>on your plan.</span>
           </h1>
           <p className="lede">
-            Help your coding agent batch independent tools and stop spending
-            full model turns on repetitive polling—without touching the work
-            that needs to stay sequential.
+            TokenShade helps your coding agent batch independent tool calls and
+            stop wasting full model turns on repetitive polling—without
+            touching work that must stay sequential.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#install">
+            <a
+              className="button button-primary"
+              href="#install"
+              data-analytics-event="ts_install_hero"
+            >
               Install in 60 seconds
             </a>
             <a
               className="button button-quiet"
               href="https://github.com/frizas/tokenshade"
+              data-analytics-event="ts_source_hero"
             >
               View the source
             </a>
@@ -230,11 +269,15 @@ export default function Home() {
             <p className="eyebrow">Honest numbers</p>
             <h2 id="proof-heading">A claim you can rerun.</h2>
             <p>
-              Across five matched Sol/XHigh pairs, grouping eight known reads
-              in one stage cut median model cycles by 85%+ and median total
-              tokens by 70%+—with the same eight-file coverage and conclusions.
+              Across five matched GPT-5.6 Sol/xhigh pairs on one bounded
+              eight-file mechanism test, TokenShade cut median model cycles by
+              85%+ and median total tokens by 70%+—with the same coverage and
+              conclusions in every run.
             </p>
-            <a href="https://github.com/frizas/tokenshade/blob/main/docs/HONEST-NUMBERS.md">
+            <a
+              href="https://github.com/frizas/tokenshade/blob/main/docs/HONEST-NUMBERS.md"
+              data-analytics-event="ts_honest_numbers"
+            >
               Read the method and limitations →
             </a>
           </div>
@@ -279,7 +322,7 @@ export default function Home() {
           <ul>
             <li>No model or reasoning changes</li>
             <li>Windows, macOS, and Linux</li>
-            <li>No hooks, backend, MCP server, or telemetry</li>
+            <li>No hooks, backend, MCP server, or plugin tracking</li>
             <li>No prompt, credential, or file-content uploads</li>
           </ul>
         </div>
@@ -291,7 +334,10 @@ export default function Home() {
           <pre>
             <code>{installCommands}</code>
           </pre>
-          <CopyInstall text={installCommands} />
+          <CopyInstall
+            text={installCommands}
+            analyticsEvent="ts_copy_commands"
+          />
           <p>Then ask Codex: <code>@tokenshade install</code></p>
         </div>
       </section>
@@ -357,9 +403,9 @@ export default function Home() {
             <p className="eyebrow">Alternative path</p>
             <h2 id="prompt-heading">Do it yourself.</h2>
             <p>
-              The plugin is the recommended path, but you don&apos;t need us! If
-              you prefer an internal skill, here&apos;s a one-tweet prompt you
-              can paste into your own agent and go wild. Have fun building!
+              The plugin is the recommended path, but you don&apos;t need us.
+              Prefer an internal skill? Paste this one-tweet prompt into your
+              own agent and go wild. Have fun building!
             </p>
           </div>
           <div className="skill-prompt-meta">
@@ -373,12 +419,21 @@ export default function Home() {
               label="Copy prompt"
               className="prompt-copy-button"
               clipboardIcon
+              analyticsEvent="ts_prompt_copy"
             />
             <SharePrompt text={tweetPrompt} />
           </div>
           <div className="skill-links">
-            <a href={sitePath("/llms.txt")}>Read llms.txt →</a>
-            <a href="https://github.com/frizas/tokenshade/blob/main/PROMPTS.md">
+            <a
+              href={sitePath("/llms.txt")}
+              data-analytics-event="ts_llms"
+            >
+              Read llms.txt →
+            </a>
+            <a
+              href="https://github.com/frizas/tokenshade/blob/main/PROMPTS.md"
+              data-analytics-event="ts_prompt_pack"
+            >
               Full prompt pack →
             </a>
           </div>
@@ -396,6 +451,7 @@ export default function Home() {
               href="https://www.manapanic.com/"
               target="_blank"
               rel="noreferrer"
+              data-analytics-event="ts_manapanic"
             >
               <span className="studio-link-label">
                 <span>+ more from us:</span>
@@ -407,6 +463,7 @@ export default function Home() {
               href="https://accounts.manapanic.com/billing"
               target="_blank"
               rel="noreferrer"
+              data-analytics-event="ts_donate"
             >
               <span className="studio-link-label">
                 <span>+ throw us a coin (and get in-game rewards)</span>
@@ -424,10 +481,22 @@ export default function Home() {
             <span>TokenShade</span>
           </div>
           <p>
-            Proudly made with AI by <strong>HiLeverage Studios</strong>
+            <span>
+              Proudly made with AI by <strong>HiLeverage Studios</strong>
+            </span>
+            <a
+              href="https://github.com/frizas/tokenshade/blob/main/PRIVACY.md"
+              data-analytics-event="ts_privacy"
+            >
+              Privacy
+            </a>
           </p>
           <div className="footer-links">
-            <a href="https://x.com/frizas" aria-label="frizas on X">
+            <a
+              href="https://x.com/frizas"
+              aria-label="frizas on X"
+              data-analytics-event="ts_social_x"
+            >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
               </svg>
@@ -435,12 +504,17 @@ export default function Home() {
             <a
               href="https://www.linkedin.com/in/frizas/"
               aria-label="frizas on LinkedIn"
+              data-analytics-event="ts_social_linkedin"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M4.98 3.5A2.49 2.49 0 1 1 0 3.5a2.49 2.49 0 0 1 4.98 0ZM.5 8h4V24h-4V8Zm7 0h3.83v2.19h.05c.53-1.01 1.83-2.07 3.77-2.07 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.58c0-2.05-.04-4.68-2.85-4.68-2.86 0-3.3 2.23-3.3 4.53V24h-4V8Z" />
               </svg>
             </a>
-            <a href="https://github.com/frizas" aria-label="frizas on GitHub">
+            <a
+              href="https://github.com/frizas"
+              aria-label="frizas on GitHub"
+              data-analytics-event="ts_social_github"
+            >
               <svg viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M8 0C3.58 0 0 3.64 0 8.13c0 3.59 2.29 6.64 5.47 7.72.4.08.55-.17.55-.38 0-.19-.01-.7-.01-1.38-2.23.49-2.69-1.09-2.69-1.09-.36-.94-.89-1.19-.89-1.19-.73-.5.05-.49.05-.49.8.06 1.23.84 1.23.84.72 1.25 1.88.89 2.34.68.07-.53.28-.89.51-1.1-1.78-.21-3.65-.9-3.65-4.02 0-.89.31-1.61.82-2.18-.08-.2-.36-1.03.08-2.15 0 0 .67-.22 2.2.83A7.52 7.52 0 0 1 8 3.95c.68 0 1.36.09 2 .27 1.53-1.05 2.2-.83 2.2-.83.44 1.12.16 1.95.08 2.15.51.57.82 1.29.82 2.18 0 3.13-1.88 3.81-3.66 4.01.29.25.54.75.54 1.52 0 1.1-.01 1.98-.01 2.25 0 .21.14.46.55.38A8.15 8.15 0 0 0 16 8.13C16 3.64 12.42 0 8 0Z" />
               </svg>

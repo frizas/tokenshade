@@ -13,8 +13,8 @@
 <p align="center"><strong>Stop the burn on your plan.</strong></p>
 
 <p align="center">
-  Help your coding agent batch independent tools and stop spending full model
-  turns on repetitive polling.
+  TokenShade helps your coding agent batch independent tool calls and stop
+  wasting full model turns on repetitive polling.
 </p>
 
 <p align="center">
@@ -26,12 +26,12 @@
 </p>
 
 <p align="center">
-  Free forever · No tracking · Open source · MIT licensed
+  Free forever · No plugin tracking · Open source · MIT licensed
 </p>
 
 <p align="center">
   <a href="https://tokenshade.vercel.app">
-    <img src="./assets/social-card-generated.png" alt="TokenShade — sunscreen for your token budget" width="100%">
+    <img src="./assets/social-card-generated.png" alt="TokenShade — Stop the burn on your plan" width="100%">
   </a>
 </p>
 
@@ -123,7 +123,8 @@ TokenShade does **not** change your:
 
 The plugin has no telemetry, backend, hooks, MCP server, credential reads, or
 runtime network client. The installer is dependency-free Node.js 20+ and works
-on Windows, macOS, and Linux. See [Privacy](./PRIVACY.md),
+on Windows, macOS, and Linux. The public website uses opt-in Google Analytics
+only after a visitor allows it. See [Privacy](./PRIVACY.md),
 [Security](./SECURITY.md), and the [architecture](./docs/ARCHITECTURE.md).
 
 ## Bring your own agent

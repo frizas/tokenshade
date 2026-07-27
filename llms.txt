@@ -5,9 +5,9 @@
 TokenShade is an independent, open-source orchestration policy for coding
 agents. It groups independent, already-known tool calls, preserves sequential
 work when order matters, and discourages repetitive polling. It is Codex-first
-with a one-session prompt for ChatGPT Work and portable Claude Code, Kimi Code
-CLI, and agent-neutral instruction files. Ordinary ChatGPT chats without agent
-tools have nothing to batch; the benchmark claim is Codex-only.
+with a one-session prompt for ChatGPT Work, a Claude Code adapter, a Kimi Code
+CLI adapter, and agent-neutral instruction files. Ordinary ChatGPT chats
+without agent tools have nothing to batch; the benchmark claim is Codex-only.
 
 ## One-tweet prompt
 
@@ -28,6 +28,9 @@ promise or a comparison against default Sol.
 - Installation: https://tokenshade.vercel.app/#install
 - Full prompt pack: https://github.com/frizas/tokenshade/blob/main/PROMPTS.md
 - Honest numbers: https://github.com/frizas/tokenshade/blob/main/docs/HONEST-NUMBERS.md
+- Privacy: https://github.com/frizas/tokenshade/blob/main/PRIVACY.md
 - Security: https://github.com/frizas/tokenshade/blob/main/SECURITY.md
 
-TokenShade is not affiliated with OpenAI. Benchmark claims are workload-specific.
+The TokenShade software has no telemetry or backend. The public website uses
+consent-based aggregate analytics. TokenShade is not affiliated with OpenAI.
+Benchmark claims are workload-specific.

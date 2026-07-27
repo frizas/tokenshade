@@ -210,10 +210,13 @@ const sitePackage = JSON.parse(
 assert.equal(sitePackage.name, "tokenshade-site");
 assert.equal(
   sitePackage.scripts["build:static"],
-  "node build/static-build.mjs",
+  "node build/static-build.mjs --vercel",
 );
 assert.equal(sitePackage.scripts["build:vercel"], "npm run build:static");
-assert.equal(sitePackage.scripts["build:pages"], "npm run build:static");
+assert.equal(
+  sitePackage.scripts["build:pages"],
+  "node build/static-build.mjs --pages",
+);
 assert.equal(sitePackage.dependencies["react-loading-skeleton"], undefined);
 assert.equal(sitePackage.dependencies["drizzle-orm"], undefined);
 assert.equal(
@@ -236,13 +239,21 @@ assert.equal(vercelConfig.framework, null);
 assert.equal(vercelConfig.outputDirectory, "out");
 assert.match(
   JSON.stringify(vercelConfig.headers),
-  /connect-src 'none'/,
-  "Vercel static host policy allows runtime connections",
+  /connect-src https:\/\/\*\.google-analytics\.com https:\/\/\*\.analytics\.google\.com https:\/\/www\.googletagmanager\.com/,
+  "Vercel analytics endpoints are not explicitly allowlisted",
+);
+assert.equal(
+  /doubleclick|googlesyndication|googleadservices/i.test(
+    JSON.stringify(vercelConfig.headers),
+  ),
+  false,
+  "Vercel policy allows advertising endpoints",
 );
 const siteRuntime = [
   path.join(root, "site", "app", "page.tsx"),
   path.join(root, "site", "app", "CopyInstall.tsx"),
   path.join(root, "site", "app", "SharePrompt.tsx"),
+  path.join(root, "site", "app", "SiteAnalytics.tsx"),
   path.join(root, "site", "app", "sitePath.ts"),
   path.join(root, "site", "app", "layout.tsx"),
 ].map((file) => fs.readFileSync(file, "utf8"));
@@ -252,6 +263,23 @@ assert.equal(
   ),
   false,
   "landing page contains a runtime network client",
+);
+const siteAnalytics = fs.readFileSync(
+  path.join(root, "site", "app", "SiteAnalytics.tsx"),
+  "utf8",
+);
+assert.match(siteAnalytics, /G-XF80ZZLVB0/);
+assert.match(siteAnalytics, /allow_google_signals:\s*false/);
+assert.match(siteAnalytics, /allow_ad_personalization_signals:\s*false/);
+assert.match(
+  siteAnalytics,
+  /https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=/,
+  "website analytics does not use the approved GA endpoint",
+);
+assert.equal(
+  /doubleclick|googlesyndication|googleadservices/i.test(siteAnalytics),
+  false,
+  "website analytics references an advertising endpoint",
 );
 const siteCss = fs.readFileSync(
   path.join(root, "site", "app", "globals.css"),
@@ -264,5 +292,5 @@ assert.equal(
 );
 
 process.stdout.write(
-  `TokenShade repository check passed (${files.length} files, 8 fixture files, zero runtime network clients).\n`,
+  `TokenShade repository check passed (${files.length} files, 8 fixture files, zero plugin runtime network clients; consent-gated website analytics).\n`,
 );

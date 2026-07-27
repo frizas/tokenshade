@@ -1,37 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
   <title id="title">TokenShade — Stop the burn on your plan</title>
-  <desc id="desc">TokenShade social card with a sunglasses sun and rounded public benchmark results.</desc>
-  <rect width="1200" height="630" fill="#fff6e9"/>
-  <rect x="10" y="10" width="1180" height="610" fill="none" stroke="#101820" stroke-width="6"/>
-  <rect x="790" y="10" width="400" height="610" fill="#ff6b4a"/>
-  <path d="M790 10v610" stroke="#101820" stroke-width="6"/>
+  <desc id="desc">A minimal TokenShade social card with the sunglasses sun mark.</desc>
+  <rect width="1200" height="630" fill="#ff6b4a"/>
+  <rect x="12" y="12" width="1176" height="606" fill="none" stroke="#101820" stroke-width="8"/>
 
   <g fill="#101820">
-    <text x="64" y="66" font-family="Consolas, monospace" font-size="18" font-weight="700" letter-spacing="2">FREE FOREVER · NO TRACKING · OPEN SOURCE</text>
-    <text x="60" y="190" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="900" letter-spacing="-5">TokenShade</text>
-    <text x="64" y="260" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="800" letter-spacing="-2">Stop the burn on your plan.</text>
-    <text x="64" y="306" font-family="Arial, Helvetica, sans-serif" font-size="24">Smarter tool batching for Codex and ChatGPT Work.</text>
-
-    <rect x="64" y="354" width="660" height="144" fill="#ff6b4a" stroke="#101820" stroke-width="4"/>
-    <path d="M394 354v144" stroke="#101820" stroke-width="4"/>
-    <text x="92" y="391" font-family="Consolas, monospace" font-size="16" font-weight="700" letter-spacing="1">MODEL CYCLES</text>
-    <text x="92" y="460" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="900" letter-spacing="-1">85%+ fewer</text>
-    <text x="422" y="391" font-family="Consolas, monospace" font-size="16" font-weight="700" letter-spacing="1">TOTAL TOKENS</text>
-    <text x="422" y="460" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="900" letter-spacing="-1">70%+ fewer</text>
-
-    <text x="64" y="550" font-family="Consolas, monospace" font-size="17" font-weight="700">5 matched pairs · same coverage · public method</text>
-    <text x="64" y="586" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">tokenshade.vercel.app</text>
+    <text x="70" y="96" font-family="Consolas, monospace" font-size="18" font-weight="700" letter-spacing="3">FREE + OPEN SOURCE</text>
+    <text x="62" y="236" font-family="Arial, Helvetica, sans-serif" font-size="104" font-weight="900" letter-spacing="-6">TokenShade</text>
+    <text x="68" y="310" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="800" letter-spacing="-2">Stop the burn on your plan.</text>
+    <text x="70" y="554" font-family="Consolas, monospace" font-size="20" font-weight="700">tokenshade.vercel.app</text>
   </g>
 
   <g fill="#101820" stroke="#101820" stroke-linecap="round" stroke-linejoin="round">
-    <g fill="none" stroke-width="18">
-      <circle cx="990" cy="298" r="126"/>
-      <path d="M935 365c16 20 35 30 55 30s39-10 55-30"/>
-      <path d="M990 105v30M990 461v30M797 298h30M1153 298h30M855 163l21 21M1104 412l21 21M1125 163l-21 21M876 412l-21 21"/>
+    <g fill="none" stroke-width="19">
+      <circle cx="970" cy="315" r="132"/>
+      <path d="M916 382c15 18 33 27 54 27s39-9 54-27"/>
+      <path d="M970 111v31M970 488v31M766 315h31M1143 315h31M826 171l22 22M1092 437l22 22M1114 171l-22 22M848 437l-22 22"/>
     </g>
-    <path stroke="none" d="M884 254h96v26c0 41-20 63-48 63s-48-22-48-63zM1000 254h96v26c0 41-20 63-48 63s-48-22-48-63z"/>
-    <rect x="972" y="254" width="36" height="18" rx="9" stroke="none"/>
+    <path stroke="none" d="M859 269h99v28c0 42-20 64-49 64s-50-22-50-64zM982 269h99v28c0 42-20 64-49 64s-50-22-50-64z"/>
+    <rect x="950" y="269" width="40" height="18" rx="9" stroke="none"/>
   </g>
-  <rect x="851" y="527" width="278" height="54" fill="#101820"/>
-  <text x="990" y="561" fill="#fff6e9" text-anchor="middle" font-family="Consolas, monospace" font-size="16" font-weight="700" letter-spacing="1">SUNSCREEN FOR YOUR TOKENS</text>
 </svg>

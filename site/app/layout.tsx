@@ -4,31 +4,31 @@ import { sitePath } from "./sitePath";
 
 const title = "TokenShade — Stop the burn on your plan";
 const description =
-  "Stop the burn on your plan. TokenShade helps AI coding agents batch independent tools and avoid repetitive polling.";
+  "Free, open-source tool orchestration for Codex and ChatGPT Work. Batch independent AI coding-agent tools and cut repetitive polling without changing your model.";
 const siteUrl = new URL("https://tokenshade.vercel.app");
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
+  applicationName: "TokenShade",
   title,
   description,
+  authors: [{ name: "HiLeverage Studios" }],
+  creator: "HiLeverage Studios",
+  publisher: "HiLeverage Studios",
+  category: "developer tools",
   alternates: {
     canonical: "/",
   },
-  keywords: [
-    "TokenShade",
-    "ChatGPT Work",
-    "ChatGPT coding agent",
-    "OpenAI Codex",
-    "Codex CLI",
-    "AGENTS.md",
-    "GPT-5.6 Sol",
-    "AI coding agent",
-    "token usage",
-    "tool batching",
-  ],
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
   icons: {
     icon: [
@@ -54,13 +54,23 @@ export const metadata: Metadata = {
     description,
     type: "website",
     url: siteUrl,
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    siteName: "TokenShade",
+    locale: "en_US",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "TokenShade — Stop the burn on your plan",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
     images: ["/og.png"],
+    creator: "@frizas",
   },
 };
 

@@ -1,5 +1,21 @@
 User-agent: *
 Allow: /
 
-# AI-readable product context: /llms.txt
+# Search and assistant crawlers are explicitly welcome.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Optional AI-readable product context: /llms.txt
 Sitemap: https://tokenshade.vercel.app/sitemap.xml

@@ -39,6 +39,7 @@ export function ShadeDemo() {
         aria-pressed={shaded}
         aria-label={`${state.mode}. ${state.action}.`}
         onClick={() => setShaded((value) => !value)}
+        data-analytics-event="ts_shade_toggle"
       >
         <span className="mode-label">{state.mode}</span>
         <img

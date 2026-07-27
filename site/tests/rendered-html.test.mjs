@@ -31,11 +31,11 @@ test("server-renders the TokenShade landing page", async () => {
   assert.match(html, /<title>TokenShade — Stop the burn on your plan<\/title>/);
   const visibleText = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   assert.match(visibleText, /Stop the burn on your plan\./);
-  assert.match(visibleText, /Free forever · No tracking · Open source/);
+  assert.match(visibleText, /Free forever · No plugin tracking · Open source/);
   assert.match(html, /Install in 60 seconds/);
   assert.match(html, /frizas\/tokenshade/);
-  assert.match(html, /No tracking/);
-  assert.match(html, /or telemetry/);
+  assert.match(html, /No plugin tracking/);
+  assert.match(html, /or plugin tracking/);
   assert.match(html, /not affiliated with OpenAI/);
   assert.match(html, /ONE-TWEET PROMPT/);
   assert.match(visibleText, /85%\+ fewer/);
@@ -47,27 +47,38 @@ test("server-renders the TokenShade landing page", async () => {
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
-test("keeps metadata, accessibility, and responsive contracts in source", async () => {
-  const [page, shadeDemo, sharePrompt, layout, css] = await Promise.all([
-    import("node:fs/promises").then(({ readFile }) =>
-      readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-    ),
-    import("node:fs/promises").then(({ readFile }) =>
-      readFile(new URL("../app/ShadeDemo.tsx", import.meta.url), "utf8"),
-    ),
-    import("node:fs/promises").then(({ readFile }) =>
-      readFile(new URL("../app/SharePrompt.tsx", import.meta.url), "utf8"),
-    ),
-    import("node:fs/promises").then(({ readFile }) =>
-      readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
-    ),
-    import("node:fs/promises").then(({ readFile }) =>
-      readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
-    ),
-  ]);
+test("keeps metadata, accessibility, analytics, and responsive contracts in source", async () => {
+  const [page, shadeDemo, sharePrompt, siteAnalytics, layout, css, vercel, robots] =
+    await Promise.all([
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+      ),
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../app/ShadeDemo.tsx", import.meta.url), "utf8"),
+      ),
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../app/SharePrompt.tsx", import.meta.url), "utf8"),
+      ),
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../app/SiteAnalytics.tsx", import.meta.url), "utf8"),
+      ),
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+      ),
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+      ),
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../vercel.json", import.meta.url), "utf8"),
+      ),
+      import("node:fs/promises").then(({ readFile }) =>
+        readFile(new URL("../public/robots.txt", import.meta.url), "utf8"),
+      ),
+    ]);
 
   assert.match(page, /aria-label="Main navigation"/);
   assert.match(page, /<ShadeDemo \/>/);
+  assert.match(page, /<SiteAnalytics \/>/);
   assert.doesNotMatch(page, /Built by|Built in Rio|Fábio Frizas/);
   assert.match(page, /Proudly made with AI by <strong>HiLeverage Studios/);
   assert.match(page, /https:\/\/www\.manapanic\.com\//);
@@ -75,6 +86,10 @@ test("keeps metadata, accessibility, and responsive contracts in source", async 
   assert.match(page, /const tweetPrompt/);
   assert.match(page, /Do it yourself/);
   assert.doesNotMatch(page, /name: "ChatGPT Work"/);
+  assert.ok(
+    page.indexOf('name: "Claude Code"') < page.indexOf('name: "Kimi Code CLI"'),
+    "Claude Code should be listed before Kimi Code CLI",
+  );
   assert.match(page, /Read llms\.txt/);
   assert.match(page, /<SharePrompt text=\{tweetPrompt\}/);
   assert.match(sharePrompt, /navigator\.share/);
@@ -94,11 +109,27 @@ test("keeps metadata, accessibility, and responsive contracts in source", async 
   assert.match(layout, /apple-touch-icon\.png/);
   assert.match(layout, /site\.webmanifest/);
   assert.match(layout, /ChatGPT Work/);
-  assert.match(layout, /GPT-5\.6 Sol/);
   assert.match(layout, /https:\/\/tokenshade\.vercel\.app/);
+  assert.match(layout, /siteName: "TokenShade"/);
+  assert.match(layout, /alt: "TokenShade — Stop the burn on your plan"/);
+  assert.match(page, /"@type": "WebSite"/);
+  assert.match(page, /price: "0"/);
+  assert.match(siteAnalytics, /G-XF80ZZLVB0/);
+  assert.match(siteAnalytics, /allow_google_signals: false/);
+  assert.match(siteAnalytics, /allow_ad_personalization_signals: false/);
+  assert.match(siteAnalytics, /page_location: `\$\{window\.location\.origin\}\$\{window\.location\.pathname\}`/);
+  assert.match(siteAnalytics, /\^ts_\[a-z0-9_\]\+\$/);
+  assert.doesNotMatch(siteAnalytics, /dataset\.(?:href|text|value)|textContent|innerText/);
+  assert.match(vercel, /https:\/\/www\.googletagmanager\.com/);
+  assert.match(vercel, /https:\/\/\*\.google-analytics\.com/);
+  assert.doesNotMatch(vercel, /doubleclick|googlesyndication|googleadservices/);
+  assert.match(robots, /OAI-SearchBot/);
+  assert.match(robots, /Claude-SearchBot/);
+  assert.match(robots, /PerplexityBot/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(css, /\.prompt-card-actions/);
+  assert.match(css, /\.analytics-consent/);
   assert.match(css, /focus-visible/);
   assert.doesNotMatch(css, /@import|url\(["']?https?:/);
   assert.doesNotMatch(css, /#62d9d2|#ffba4a|#26343d|#f5ead9/i);

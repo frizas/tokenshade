@@ -43,6 +43,7 @@ export function SharePrompt({ text }: { text: string }) {
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={share}
+        data-analytics-event="ts_prompt_share"
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path
@@ -63,6 +64,7 @@ export function SharePrompt({ text }: { text: string }) {
             href={`https://wa.me/?text=${fallbackText}`}
             target="_blank"
             rel="noreferrer"
+            data-analytics-event="ts_share_whatsapp"
           >
             WhatsApp
           </a>
@@ -71,10 +73,16 @@ export function SharePrompt({ text }: { text: string }) {
             href={`https://twitter.com/intent/tweet?text=${fallbackText}`}
             target="_blank"
             rel="noreferrer"
+            data-analytics-event="ts_share_x"
           >
             X
           </a>
-          <button role="menuitem" type="button" onClick={copyLink}>
+          <button
+            role="menuitem"
+            type="button"
+            onClick={copyLink}
+            data-analytics-event="ts_share_copy_link"
+          >
             {linkCopied ? "Link copied" : "Copy link"}
           </button>
         </div>
