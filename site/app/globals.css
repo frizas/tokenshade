@@ -500,6 +500,10 @@ h2 {
   max-width: 850px;
 }
 
+.rule-section .section-heading h2 span {
+  display: block;
+}
+
 .rules {
   margin: 60px 0 0;
   padding: 0;
@@ -1125,16 +1129,17 @@ footer {
 
 .footer-grid p {
   margin: 0;
-  display: grid;
-  gap: 9px;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
   color: var(--paper);
   text-align: center;
   font-size: 13px;
 }
 
 .footer-grid p a {
-  width: fit-content;
-  margin-inline: auto;
+  flex: none;
   color: var(--paper);
   font: 700 11px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
   opacity: 0.72;
@@ -1348,11 +1353,14 @@ footer {
   }
 
   .footer-grid p {
+    justify-content: flex-start;
+    gap: 8px;
     text-align: left;
+    font-size: clamp(11px, 3.4vw, 13px);
   }
 
   .footer-grid p a {
-    margin-inline: 0;
+    font-size: 10px;
   }
 
   .footer-links {

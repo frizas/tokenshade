@@ -9,7 +9,7 @@ const installCommands = `codex plugin marketplace add frizas/tokenshade
 codex plugin add tokenshade@tokenshade`;
 
 const tweetPrompt =
-  "Build me a TokenShade skill from https://tokenshade.vercel.app. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.";
+  "Build me a skill based on TokenShade (https://tokenshade.vercel.app). Layer batching and polling rules over my setup; preserve instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show dry-run and diff first.";
 
 const agents = [
   {
@@ -41,7 +41,7 @@ const faqs = [
       "TokenShade is built and benchmarked for OpenAI Codex. ChatGPT Work users can paste the one-tweet prompt into a session. Ordinary ChatGPT chats without agent tools have nothing to batch, so the measured savings claim does not apply.",
   },
   {
-    question: "Does TokenShade change my GPT model or reasoning?",
+    question: "Does TokenShade change my model or reasoning?",
     answer:
       "No. It changes a small orchestration policy, not your model, reasoning level, permissions, memory, or sandbox.",
   },
@@ -132,11 +132,11 @@ export default function Home() {
       />
       <SiteAnalytics />
       <div className="notice">
-        <span>Free forever</span>
-        <span aria-hidden="true">·</span>
-        <span>No plugin tracking</span>
-        <span aria-hidden="true">·</span>
         <span>Open source</span>
+        <span aria-hidden="true">·</span>
+        <span>No tracking</span>
+        <span aria-hidden="true">·</span>
+        <span>Free forever</span>
       </div>
 
       <header className="shell nav">
@@ -232,7 +232,10 @@ export default function Home() {
       <section className="shell rule-section" id="how" aria-labelledby="how-heading">
         <div className="section-heading">
           <p className="eyebrow">Three narrow rules</p>
-          <h2 id="how-heading">Shade the waste. Keep the work.</h2>
+          <h2 id="how-heading">
+            <span>Shade the waste.</span>
+            <span>Keep the work.</span>
+          </h2>
         </div>
         <ol className="rules">
           <li>

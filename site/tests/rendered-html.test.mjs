@@ -31,16 +31,15 @@ test("server-renders the TokenShade landing page", async () => {
   assert.match(html, /<title>TokenShade — Stop the burn on your plan<\/title>/);
   const visibleText = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   assert.match(visibleText, /Stop the burn on your plan\./);
-  assert.match(visibleText, /Free forever · No plugin tracking · Open source/);
+  assert.match(visibleText, /Open source · No tracking · Free forever/);
   assert.match(html, /Install in 60 seconds/);
   assert.match(html, /frizas\/tokenshade/);
-  assert.match(html, /No plugin tracking/);
   assert.match(html, /or plugin tracking/);
   assert.match(html, /not affiliated with OpenAI/);
   assert.match(html, /ONE-TWEET PROMPT/);
   assert.match(visibleText, /85%\+ fewer/);
   assert.match(visibleText, /70%\+ fewer/);
-  assert.match(visibleText, /272 \/ 280/);
+  assert.match(visibleText, /263 \/ 280/);
   assert.match(html, /Does TokenShade work with ChatGPT\?/);
   assert.match(html, /application\/ld\+json/);
   assert.match(html, /ONE-TWEET PROMPT/);

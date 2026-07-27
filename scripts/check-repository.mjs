@@ -106,7 +106,7 @@ assert.equal(
 );
 assert.match(
   fs.readFileSync(path.join(root, "llms.txt"), "utf8"),
-  /Build me a TokenShade skill/,
+  /Build me a skill based on TokenShade/,
   "llms.txt is missing the one-tweet prompt",
 );
 assert.equal(

@@ -148,7 +148,7 @@ The plugin is the recommended path, but you do not need us. Paste this
 one-tweet prompt into your agent:
 
 ```text
-Build me a TokenShade skill from https://tokenshade.vercel.app. Layer its batching and polling rules over my setup; preserve existing instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show a dry-run and diff first.
+Build me a skill based on TokenShade (https://tokenshade.vercel.app). Layer batching and polling rules over my setup; preserve instructions. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. Show dry-run and diff first.
 ```
 
 AI-readable context is also available in [`llms.txt`](./llms.txt).
