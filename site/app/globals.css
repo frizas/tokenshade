@@ -858,7 +858,7 @@ h3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
   padding-block: 84px;
 }
 

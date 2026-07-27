@@ -395,7 +395,7 @@ export default function Home() {
               rel="noreferrer"
             >
               <span className="studio-link-label">
-                <span>{"+ also from us:\u00a0"}</span>
+                <span>+ more from us:</span>
                 <strong>manapanic</strong>
                 <span aria-hidden="true">↗</span>
               </span>
