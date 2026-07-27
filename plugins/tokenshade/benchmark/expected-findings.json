@@ -17,14 +17,14 @@
       "any": ["product", "adapter", "boundary", "raybox"]
     },
     {
-      "id": "split-protocol",
-      "all": ["catalog", "snapshot"],
-      "any": ["raw", "version", "json", "envelope", "protocol"]
+      "id": "mobile-install-gap",
+      "all": ["mobile"],
+      "any": ["zip", "bootstrap", "package", "packaging", "install", "installation", "extract", "activation"]
     },
     {
-      "id": "mobile-install-gap",
-      "all": ["mobile", "zip"],
-      "any": ["runtime", "install", "extract", "bootstrap", "archive"]
+      "id": "mobile-buffer-portability",
+      "all": ["mobile", "buffer"],
+      "any": ["runtime", "portable", "portability", "api", "global"]
     }
   ]
 }

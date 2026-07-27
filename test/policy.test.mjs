@@ -8,6 +8,7 @@ import {
   canonicalPolicy,
   classifyContent,
   execute,
+  policyContentForPhase,
 } from "../plugins/tokenshade/scripts/tokenshade.mjs";
 
 function temporaryDirectory(t) {
@@ -153,6 +154,21 @@ test("backup purge requires explicit confirmation and ignores unrelated files", 
   assert.equal(purge.removed, 1);
   assert.equal(fs.existsSync(installation.backup.path), false);
   assert.equal(fs.readFileSync(unrelated, "utf8"), "keep");
+});
+
+test("benchmark phases use an explicit serial control and canonical treatment", () => {
+  const original = `# Existing
+
+${canonicalPolicy()}
+`;
+  const baseline = policyContentForPhase(original, "baseline");
+  assert.match(baseline, /TokenShade benchmark control: serial tool staging/);
+  assert.match(baseline, /exactly one Node-backed Code Mode call/);
+  assert.doesNotMatch(baseline, /TokenShade: shade the waste, not the work/);
+
+  const treatment = policyContentForPhase(original, "treatment");
+  assert.match(treatment, /TokenShade: shade the waste, not the work/);
+  assert.doesNotMatch(treatment, /TokenShade benchmark control/);
 });
 
 test("policy mutations reject symbolic-link targets and backup directories", (t) => {

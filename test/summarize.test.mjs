@@ -23,12 +23,16 @@ function run(phase, index, modelCycles, totalTokens, grouped) {
       outputTokens: 10,
       totalTokens,
       toolCalls: modelCycles,
+      toolCallsPerOuterStage: 1,
+      maxGroupedOperations: grouped ? 4 : 1,
       pollingCalls: 0,
     },
     validation: {
       coverageComplete: true,
       conclusionsComplete: true,
       genuineGrouping: grouped,
+      controlCompliant: phase !== "baseline" || !grouped,
+      extraScopeDetected: false,
     },
   };
 }
@@ -56,7 +60,11 @@ test("summarizer computes medians without double-counting cached input", (t) => 
   assert.equal(summary.aggregate.treatment.medianTotalTokens, 450);
   assert.equal(summary.aggregate.reductions.modelCyclesPercent, 68.18);
   assert.equal(summary.aggregate.reductions.totalTokensPercent, 59.09);
+  assert.equal(summary.aggregate.baseline.medianToolCallsPerOuterStage, 1);
+  assert.equal(summary.aggregate.treatment.medianMaxGroupedOperations, 4);
   assert.equal(summary.gate.modelCyclesAtLeast30Percent, true);
   assert.equal(summary.gate.totalTokensAtLeast20Percent, true);
+  assert.equal(summary.gate.serialControlEveryBaseline, true);
   assert.equal(summary.gate.genuineGroupingEveryTreatment, true);
+  assert.equal(summary.gate.noExtraScopeEveryRun, true);
 });

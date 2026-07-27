@@ -4,10 +4,10 @@
 
 <h1 align="center">TokenShade</h1>
 
-<p align="center"><strong>Stop the token burn on your plan.</strong></p>
+<p align="center"><strong>Stop the burn on your plan.</strong></p>
 
 <p align="center">
-  TokenShade helps Codex batch independent tools and stop spending model turns
+  TokenShade helps your coding agent batch independent tools and stop spending model turns
   on repetitive polling.
 </p>
 
@@ -72,6 +72,9 @@ node plugins/tokenshade/scripts/tokenshade.mjs install --dry-run --json
 node plugins/tokenshade/scripts/tokenshade.mjs install --json
 ```
 
+The dependency-free utility uses Node.js 20+ built-ins and works on Windows,
+macOS, and Linux.
+
 Status and removal are equally explicit:
 
 ```text
@@ -108,6 +111,13 @@ The fixture, prompt, expected findings, sanitized run metrics, environment
 versions, hashes, and reproduction command are committed. See
 [Honest Numbers](./docs/HONEST-NUMBERS.md).
 
+The public fixture is a serial-control/TokenShade mechanism test, not an
+organic-workload simulator or comparison against default Sol. The task prompt
+is identical in both phases; the harness swaps only the temporary global
+staging policy. An unguided preflight was neutral on median cycles because Sol
+already grouped most baseline runs; that failed preflight and the applicability
+limit are documented in Honest Numbers.
+
 ## Where it may be neutral
 
 TokenShade is aimed at tool-heavy investigations. It may be neutral for a
@@ -117,10 +127,12 @@ prompts or output, minimize generated code, or choose a cheaper model.
 
 ## Other agents
 
-Codex is the measured target. The same orchestration principle can be installed
-as agent-neutral instructions for Claude Code, Kimi Code CLI, and hosts that
-load persistent Markdown policy. Those adapters are labeled compatible, not
-benchmarked. See [Portability](./docs/PORTABILITY.md) and [Prompts](./PROMPTS.md).
+Codex is the measured target. ChatGPT Work users can paste the one-session
+prompt, and the same orchestration principle can be installed as agent-neutral
+instructions for Claude Code, Kimi Code CLI, and hosts that load persistent
+Markdown policy. Those paths are labeled compatible, not benchmarked. Ordinary
+ChatGPT chats without agent tools have nothing to batch. See
+[Portability](./docs/PORTABILITY.md) and [Prompts](./PROMPTS.md).
 
 ## Development
 

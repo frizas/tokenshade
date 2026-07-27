@@ -19,7 +19,7 @@ Use `--target <path>` only when the user selected a non-default policy file. Oth
 
 Use `--profile portable` only when the user selected a non-Codex instruction
 file such as Claude Code's `CLAUDE.md` or Kimi's `AGENTS.md`. The default
-`codex` profile keeps the measured Code Mode and Windows cadence wording.
+`codex` profile keeps the measured Code Mode wording and cross-platform cadence.
 
 Commands:
 

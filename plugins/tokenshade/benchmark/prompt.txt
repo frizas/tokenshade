@@ -13,9 +13,18 @@ Inspect exactly these eight files and no other files:
 
 Do not modify anything. Do not search the tree, inspect Git history, run tests, or broaden the investigation.
 
+Tool staging is the tested variable. Read every file with the Node-backed Code
+Mode tool, not a shell command. Follow the active global tool-staging policy
+exactly.
+
 Return:
 
 1. One compact Markdown table with exactly eight rows, in the order above, with columns `Path`, `Role`, and `Key contract`.
-2. Exactly three concise cross-file findings or risks grounded in the eight inspected files.
+2. Exactly three concise cross-file findings grounded in the eight inspected
+   files, in this order:
+   - whether reusable engine code respects the fixture's product boundary;
+   - whether mobile packaging proves the documented runtime installation flow;
+   - whether the protocol's `Buffer` dependency is established as portable by
+     the mobile runtime documentation.
 
 Mention every path in the table.

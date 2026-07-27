@@ -91,6 +91,21 @@ assert.deepEqual(
   "portable and plugin policy copies diverged",
 );
 assert.deepEqual(
+  fs.readFileSync(path.join(root, "llms.txt")),
+  fs.readFileSync(path.join(root, "site", "public", "llms.txt")),
+  "repository and landing-page llms.txt copies diverged",
+);
+assert.match(
+  fs.readFileSync(path.join(root, "llms.txt"), "utf8"),
+  /Batch 2\+ independent, already-known tool calls/,
+  "llms.txt is missing the one-tweet prompt",
+);
+assert.equal(
+  fs.existsSync(path.join(root, "site", "public", "robots.txt")),
+  true,
+  "landing page is missing robots.txt",
+);
+assert.deepEqual(
   fs.readFileSync(path.join(root, "AGENTS.md")),
   fs.readFileSync(path.join(root, "policy", "AGENTS.md")),
   "root AGENTS.md and canonical Codex policy diverged",
@@ -169,6 +184,7 @@ assert.equal(sitePackage.dependencies["drizzle-orm"], undefined);
 const siteRuntime = [
   path.join(root, "site", "app", "page.tsx"),
   path.join(root, "site", "app", "CopyInstall.tsx"),
+  path.join(root, "site", "app", "SharePrompt.tsx"),
   path.join(root, "site", "app", "layout.tsx"),
 ].map((file) => fs.readFileSync(file, "utf8"));
 assert.equal(

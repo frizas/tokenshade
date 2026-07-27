@@ -17,6 +17,14 @@ const PORTABLE_POLICY_FILE = path.resolve(
 );
 const START_MARKER = "<!-- tokenshade:start -->";
 const END_MARKER = "<!-- tokenshade:end -->";
+const BENCHMARK_CONTROL_START = "<!-- tokenshade-benchmark-control:start -->";
+const BENCHMARK_CONTROL_END = "<!-- tokenshade-benchmark-control:end -->";
+const BENCHMARK_CONTROL = `${BENCHMARK_CONTROL_START}
+### TokenShade benchmark control: serial tool staging
+
+- For the current TokenShade benchmark task only, issue exactly one Node-backed Code Mode call for each explicitly listed file, in the listed order. Wait for each result before issuing the next call.
+- Read exactly one file per call. Do not use \`Promise.all\`, \`Promise.allSettled\`, or any other multi-operation wrapper.
+${BENCHMARK_CONTROL_END}`;
 const BACKUP_DIRNAME = ".tokenshade-backups";
 const VERSION = "0.1.0";
 
@@ -116,6 +124,26 @@ function removePolicy(content) {
   return `${content.slice(0, span.start)}${content.slice(span.end)}`;
 }
 
+function appendBenchmarkControl(content) {
+  if (
+    content.includes(BENCHMARK_CONTROL_START) ||
+    content.includes(BENCHMARK_CONTROL_END)
+  ) {
+    throw new CliError(
+      "Benchmark control markers already exist in the global policy.",
+    );
+  }
+  const eol = detectEol(content);
+  const block = BENCHMARK_CONTROL.replace(/\n/g, eol);
+  if (content.length === 0) return `${block}${eol}`;
+  const separator = content.endsWith(`${eol}${eol}`)
+    ? ""
+    : content.endsWith(eol)
+      ? eol
+      : `${eol}${eol}`;
+  return `${content}${separator}${block}${eol}`;
+}
+
 function recoverKnownPolicy(content, profile = "codex") {
   const markerLine = new RegExp(
     `^[\\t ]*(?:${escapeRegExp(START_MARKER)}|${escapeRegExp(END_MARKER)})[\\t ]*(?:\\r?\\n|$)`,
@@ -140,7 +168,8 @@ function policyContentForPhase(content, phase) {
     throw new CliError("TokenShade markers are malformed; repair them before benchmarking.");
   }
   if (phase === "baseline") {
-    return state === "absent" ? content : removePolicy(content);
+    const withoutTokenShade = state === "absent" ? content : removePolicy(content);
+    return appendBenchmarkControl(withoutTokenShade);
   }
   if (phase === "treatment") {
     if (state === "absent") return appendPolicy(content, "codex");
@@ -629,12 +658,24 @@ function summarizeResults(options) {
     medianOutputTokens: median(selected.map((run) => run.metrics.outputTokens)),
     medianTotalTokens: median(selected.map((run) => run.metrics.totalTokens)),
     medianToolCalls: median(selected.map((run) => run.metrics.toolCalls)),
+    medianToolCallsPerOuterStage: median(
+      selected.map((run) => run.metrics.toolCallsPerOuterStage),
+    ),
+    medianMaxGroupedOperations: median(
+      selected.map((run) => run.metrics.maxGroupedOperations),
+    ),
     allCoverageComplete: selected.every((run) => run.validation.coverageComplete),
     allConclusionsComplete: selected.every(
       (run) => run.validation.conclusionsComplete,
     ),
     allGenuinelyGrouped: selected.every(
       (run) => run.validation.genuineGrouping,
+    ),
+    allControlCompliant: selected.every(
+      (run) => run.validation.controlCompliant !== false,
+    ),
+    allNoExtraScope: selected.every(
+      (run) => run.validation.extraScopeDetected !== true,
     ),
     totalPollingCalls: selected.reduce(
       (sum, run) => sum + run.metrics.pollingCalls,
@@ -676,9 +717,14 @@ function summarizeResults(options) {
       equivalentConclusions:
         baselineAggregate.allConclusionsComplete &&
         treatmentAggregate.allConclusionsComplete,
+      serialControlEveryBaseline:
+        baselineAggregate.allControlCompliant,
       genuineGroupingEveryTreatment:
         treatmentAggregate.allGenuinelyGrouped,
       noTreatmentPolling: treatmentAggregate.totalPollingCalls === 0,
+      noExtraScopeEveryRun:
+        baselineAggregate.allNoExtraScope &&
+        treatmentAggregate.allNoExtraScope,
     },
   };
 }

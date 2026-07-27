@@ -216,13 +216,12 @@ function numberedFindings(text) {
 }
 
 function validateConclusion(findings, expected) {
-  return expected.findings.map((finding) => {
-    const matched = findings.some(
-      (text) =>
-        finding.all.every((word) => text.includes(word.toLowerCase())) &&
-        finding.any.some((word) => text.includes(word.toLowerCase())),
-    );
-    return { id: finding.id, matched };
+  return expected.findings.map((finding, index) => {
+    const text = findings[index] ?? "";
+    const matched =
+      finding.all.every((word) => text.includes(word.toLowerCase())) &&
+      finding.any.some((word) => text.includes(word.toLowerCase()));
+    return { id: finding.id, findingIndex: index + 1, matched };
   });
 }
 
@@ -325,6 +324,11 @@ function runCodex(options, phase, pair, workRoot, metadata, expected, prompt) {
   }
   const finalText = fs.readFileSync(finalPath, "utf8");
   const analyzed = analyzeTrace(result.stdout, finalText, expected);
+  const controlCompliant =
+    phase !== "baseline" ||
+    (analyzed.metrics.modelCycles === expected.paths.length &&
+      analyzed.metrics.toolCalls === expected.paths.length &&
+      analyzed.metrics.maxGroupedOperations === 1);
   return {
     kind: "tokenshade-benchmark-run",
     schemaVersion: 1,
@@ -336,6 +340,10 @@ function runCodex(options, phase, pair, workRoot, metadata, expected, prompt) {
     durationMs: Date.now() - started,
     ...metadata,
     ...analyzed,
+    validation: {
+      ...analyzed.validation,
+      controlCompliant,
+    },
   };
 }
 
@@ -344,17 +352,24 @@ function scorecard(summary, metadata) {
   const treatment = summary.aggregate.treatment;
   const reductions = summary.aggregate.reductions;
   const passed = Object.values(summary.gate).every(Boolean);
+  const pairLabel =
+    summary.runs.baseline === 1
+      ? "One matched serial-control/TokenShade pair"
+      : `${summary.runs.baseline} matched serial-control/TokenShade pairs`;
   return `# TokenShade benchmark scorecard
 
-Five matched baseline/treatment pairs on the bundled eight-file public fixture.
+${pairLabel} on the bundled eight-file public fixture.
 
-| Metric | Baseline median | Treatment median | Change |
+| Metric | Serial control median | TokenShade median | Change |
 |---|---:|---:|---:|
 | Model cycles | ${baseline.medianModelCycles} | ${treatment.medianModelCycles} | ${reductions.modelCyclesPercent}% fewer |
 | Input tokens | ${baseline.medianInputTokens.toLocaleString("en-US")} | ${treatment.medianInputTokens.toLocaleString("en-US")} | workload observation |
 | Cached input tokens | ${baseline.medianCachedInputTokens.toLocaleString("en-US")} | ${treatment.medianCachedInputTokens.toLocaleString("en-US")} | workload observation |
 | Output tokens | ${baseline.medianOutputTokens.toLocaleString("en-US")} | ${treatment.medianOutputTokens.toLocaleString("en-US")} | workload observation |
 | Total tokens | ${baseline.medianTotalTokens.toLocaleString("en-US")} | ${treatment.medianTotalTokens.toLocaleString("en-US")} | ${reductions.totalTokensPercent}% fewer |
+| Tool calls / outer stage | ${baseline.medianToolCallsPerOuterStage} | ${treatment.medianToolCallsPerOuterStage} | staging observation |
+| Max grouped operations | ${baseline.medianMaxGroupedOperations} | ${treatment.medianMaxGroupedOperations} | staging observation |
+| Polling calls | ${baseline.totalPollingCalls} | ${treatment.totalPollingCalls} | aggregate |
 
 Gate: **${passed ? "PASS" : "FAIL"}**
 
@@ -370,6 +385,7 @@ Gate: **${passed ? "PASS" : "FAIL"}**
 - Platform: \`${metadata.platform}\`
 
 These are observed medians for this bounded workload, not a universal token-savings promise.
+The serial control is an explicit mechanism baseline, not a claim about default Sol behavior.
 Cached input is included inside input tokens and is never added a second time.
 `;
 }
@@ -504,7 +520,11 @@ async function main(argv = process.argv.slice(2)) {
             phase,
             pair,
             workRoot,
-            metadata,
+            {
+              ...metadata,
+              activePolicySha256: sha256(Buffer.from(policy, "utf8")),
+              tokenShadePolicyActive: phase === "treatment",
+            },
             expected,
             prompt,
           );

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 
-const title = "TokenShade — Stop the token burn on your plan";
+const title = "TokenShade for ChatGPT Work & Codex";
 const description =
-  "TokenShade helps Codex batch independent tools and stop spending turns on repetitive polling.";
+  "Stop the burn on your plan. TokenShade helps AI coding agents batch independent tools and avoid repetitive polling.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const requestHeaders = await headers();
@@ -29,20 +29,36 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    keywords: [
+      "TokenShade",
+      "ChatGPT Work",
+      "ChatGPT coding agent",
+      "OpenAI Codex",
+      "Codex CLI",
+      "AGENTS.md",
+      "GPT-5.6 Sol",
+      "AI coding agent",
+      "token usage",
+      "tool batching",
+    ],
+    robots: {
+      index: true,
+      follow: true,
+    },
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
     },
     openGraph: {
       title,
-      description: "Safer tool batching and calmer polling for OpenAI Codex.",
+      description,
       type: "website",
       ...(image ? { images: [{ url: image, width: 1200, height: 630 }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
-      description: "Safer tool batching and calmer polling for OpenAI Codex.",
+      description,
       ...(image ? { images: [image] } : {}),
     },
   };

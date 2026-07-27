@@ -1,14 +1,23 @@
 import { CopyInstall } from "./CopyInstall";
+import { SharePrompt } from "./SharePrompt";
 import { ShadeDemo } from "./ShadeDemo";
 
 const installCommands = `codex plugin marketplace add frizas/tokenshade
 codex plugin add tokenshade@tokenshade`;
+
+const tweetPrompt =
+  "Batch 2+ independent, already-known tool calls in one concurrent stage; inspect every result. Keep dependencies, exploration, approvals, conflicting writes, waits, and resumes sequential. For long commands, wait meaningfully before polling. Never invent work just to batch.";
 
 const agents = [
   {
     name: "OpenAI Codex",
     support: "Native plugin + AGENTS.md",
     state: "Benchmarked",
+  },
+  {
+    name: "ChatGPT Work",
+    support: "One-session prompt",
+    state: "Compatible",
   },
   {
     name: "Kimi Code CLI",
@@ -27,9 +36,70 @@ const agents = [
   },
 ];
 
+const faqs = [
+  {
+    question: "Does TokenShade work with ChatGPT?",
+    answer:
+      "TokenShade is built and benchmarked for OpenAI Codex. ChatGPT Work users can paste the one-tweet prompt into a session. Ordinary ChatGPT chats without agent tools have nothing to batch, so the measured savings claim does not apply.",
+  },
+  {
+    question: "Does TokenShade change my GPT model or reasoning?",
+    answer:
+      "No. It changes a small orchestration policy, not your model, reasoning level, permissions, memory, or sandbox.",
+  },
+  {
+    question: "Does it work on Windows, macOS, and Linux?",
+    answer:
+      "Yes. The utility uses Node.js 20+ built-ins, and the policy describes tool behavior without depending on an operating system.",
+  },
+  {
+    question: "Can I use the prompt with Claude Code or Kimi Code CLI?",
+    answer:
+      "Yes. Agent-neutral and host-specific adapters are included, but the published benchmark claim remains Codex-only until those hosts are measured separately.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      name: "TokenShade",
+      applicationCategory: "DeveloperApplication",
+      applicationSubCategory: "AI coding agent workflow tool",
+      operatingSystem: "Windows, macOS, Linux",
+      softwareRequirements: "Node.js 20+ or OpenAI Codex",
+      description:
+        "An open-source orchestration policy and prompt for ChatGPT Work, OpenAI Codex, and portable AI coding agent workflows.",
+      isAccessibleForFree: true,
+      license: "https://opensource.org/license/mit",
+      sameAs: "https://github.com/frizas/tokenshade",
+      author: {
+        "@type": "Organization",
+        name: "HiLeverage Studios",
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ],
+};
+
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="notice">
         <span>Independent open source</span>
         <span aria-hidden="true">·</span>
@@ -59,9 +129,12 @@ export default function Home() {
       <section className="hero shell" id="top">
         <div className="hero-copy">
           <p className="eyebrow">Sol runs hot. Shade the waste.</p>
-          <h1>Stop the token burn on your plan.</h1>
+          <h1>
+            <span>Stop the burn</span>
+            <span>on your plan.</span>
+          </h1>
           <p className="lede">
-            TokenShade helps Codex batch independent tools and stop spending
+            Help your coding agent batch independent tools and stop spending
             full model turns on repetitive polling—without touching the work
             that needs to stay sequential.
           </p>
@@ -146,11 +219,47 @@ export default function Home() {
             <span>03</span>
             <h3>Poll like a grown-up.</h3>
             <p>
-              Long Windows commands get a real initial yield and meaningful
+              Long-running commands get a real initial yield and meaningful
               resume intervals—not a turn-burning stream of status checks.
             </p>
           </li>
         </ol>
+      </section>
+
+      <section className="prompt-section" id="prompt" aria-labelledby="prompt-heading">
+        <div className="shell prompt-grid">
+          <div className="prompt-intro">
+            <p className="eyebrow">Open prompt</p>
+            <h2 id="prompt-heading">Copy the idea. Try it anywhere.</h2>
+            <p>
+              Want to test the behavior before installing anything? Paste this
+              agent-neutral prompt into one session. The durable plugin adds
+              safe updates, backups, audits, and reproducible benchmarks.
+            </p>
+            <div className="prompt-links">
+              <a href="/llms.txt">Read llms.txt →</a>
+              <a href="https://github.com/frizas/tokenshade/blob/main/PROMPTS.md">
+                Full prompt pack →
+              </a>
+            </div>
+          </div>
+          <div className="prompt-card" aria-label="One-tweet TokenShade prompt">
+            <div className="prompt-card-top">
+              <span>ONE-TWEET PROMPT</span>
+              <strong>{tweetPrompt.length} / 280</strong>
+            </div>
+            <blockquote>{tweetPrompt}</blockquote>
+            <div className="prompt-card-actions">
+              <CopyInstall
+                text={tweetPrompt}
+                label="Copy prompt"
+                className="prompt-copy-button"
+                clipboardIcon
+              />
+              <SharePrompt text={tweetPrompt} />
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="proof" id="proof" aria-labelledby="proof-heading">
@@ -159,10 +268,10 @@ export default function Home() {
             <p className="eyebrow">Honest numbers</p>
             <h2 id="proof-heading">A claim you can rerun.</h2>
             <p>
-              The release benchmark uses five matched baseline/treatment pairs,
-              the same Sol model and XHigh effort, a fixed eight-file public
-              fixture, exact coverage requirements, and committed sanitized
-              run metrics.
+              The release benchmark uses five matched serial-control/TokenShade
+              pairs, the same Sol model and XHigh effort, a fixed eight-file
+              public fixture, exact coverage requirements, and committed
+              sanitized run metrics.
             </p>
             <a href="https://github.com/frizas/tokenshade/blob/main/docs/HONEST-NUMBERS.md">
               Read the method and limitations →
@@ -190,8 +299,8 @@ export default function Home() {
               <strong>Equivalent required</strong>
             </div>
             <p>
-              Release claims stay gated until the public run passes. No
-              extrapolation. No estimated savings dressed up as usage.
+              Claims ship only after the public gate passes—no extrapolation,
+              no estimates dressed up as usage.
             </p>
           </div>
         </div>
@@ -208,6 +317,7 @@ export default function Home() {
           </p>
           <ul>
             <li>No model or reasoning changes</li>
+            <li>Windows, macOS, and Linux</li>
             <li>No hooks, backend, MCP server, or telemetry</li>
             <li>No prompt, credential, or file-content uploads</li>
           </ul>
@@ -248,6 +358,24 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="shell faq" id="faq" aria-labelledby="faq-heading">
+        <div className="section-heading">
+          <p className="eyebrow">Straight answers</p>
+          <h2 id="faq-heading">Before you put on the shades.</h2>
+        </div>
+        <div className="faq-list">
+          {faqs.map((faq) => (
+            <details key={faq.question}>
+              <summary>
+                <span>{faq.question}</span>
+                <i aria-hidden="true">+</i>
+              </summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
       <section className="shell limits" aria-labelledby="limits-heading">
         <div>
           <p className="eyebrow">Where shade helps</p>
@@ -262,6 +390,38 @@ export default function Home() {
         </p>
       </section>
 
+      <aside
+        className="studio-plug"
+        id="studio"
+        aria-label="More from HiLeverage Studios"
+      >
+        <div className="shell studio-plug-grid">
+          <div className="studio-links">
+            <a
+              href="https://www.manapanic.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="studio-link-label">
+                <span>{"+ also from us:\u00a0"}</span>
+                <strong>manapanic</strong>
+                <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+            <a
+              href="https://accounts.manapanic.com/billing"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="studio-link-label">
+                <span>+ throw us a coin</span>
+                <span aria-hidden="true">↗</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </aside>
+
       <footer>
         <div className="shell footer-grid">
           <div className="brand footer-brand">
@@ -269,12 +429,27 @@ export default function Home() {
             <span>TokenShade</span>
           </div>
           <p>
-            Built by <a href="https://github.com/frizas">frizas</a>.
+            Proudly made with AI by <strong>HiLeverage Studios</strong>
           </p>
           <div className="footer-links">
-            <a href="https://x.com/frizas">X</a>
-            <a href="https://www.linkedin.com/in/fabiofrizas/">LinkedIn</a>
-            <a href="https://github.com/frizas">GitHub</a>
+            <a href="https://x.com/frizas" aria-label="frizas on X">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/frizas/"
+              aria-label="frizas on LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4.98 3.5A2.49 2.49 0 1 1 0 3.5a2.49 2.49 0 0 1 4.98 0ZM.5 8h4V24h-4V8Zm7 0h3.83v2.19h.05c.53-1.01 1.83-2.07 3.77-2.07 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.58c0-2.05-.04-4.68-2.85-4.68-2.86 0-3.3 2.23-3.3 4.53V24h-4V8Z" />
+              </svg>
+            </a>
+            <a href="https://github.com/frizas" aria-label="frizas on GitHub">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.64 0 8.13c0 3.59 2.29 6.64 5.47 7.72.4.08.55-.17.55-.38 0-.19-.01-.7-.01-1.38-2.23.49-2.69-1.09-2.69-1.09-.36-.94-.89-1.19-.89-1.19-.73-.5.05-.49.05-.49.8.06 1.23.84 1.23.84.72 1.25 1.88.89 2.34.68.07-.53.28-.89.51-1.1-1.78-.21-3.65-.9-3.65-4.02 0-.89.31-1.61.82-2.18-.08-.2-.36-1.03.08-2.15 0 0 .67-.22 2.2.83A7.52 7.52 0 0 1 8 3.95c.68 0 1.36.09 2 .27 1.53-1.05 2.2-.83 2.2-.83.44 1.12.16 1.95.08 2.15.51.57.82 1.29.82 2.18 0 3.13-1.88 3.81-3.66 4.01.29.25.54.75.54 1.52 0 1.1-.01 1.98-.01 2.25 0 .21.14.46.55.38A8.15 8.15 0 0 0 16 8.13C16 3.64 12.42 0 8 0Z" />
+              </svg>
+            </a>
           </div>
         </div>
       </footer>

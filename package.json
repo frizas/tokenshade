@@ -1,7 +1,7 @@
 {
   "name": "tokenshade",
   "version": "0.1.0",
-  "description": "Stop the token burn on your plan.",
+  "description": "Stop the burn on your plan.",
   "type": "module",
   "private": true,
   "license": "MIT",

@@ -62,8 +62,8 @@ test("trace analysis recognizes one concurrent outer stage and sanitized validat
   const final = `${rows}
 
 1. \`src/reconnect.mjs\` embeds Raybox product copy in reusable src code instead of an adapter, violating the boundary.
-2. Catalog synchronization sends a raw snapshot request while inbound catalog data is versioned JSON, splitting the protocol contract.
-3. The mobile bootstrap ZIP does not prove downloaded runtime asset install or extraction without the native archive extension.
+2. The mobile bootstrap ZIP does not prove downloaded runtime asset install or extraction without the native archive extension.
+3. Mobile portability is uncertain because the protocol depends on the Buffer global and the mobile runtime API is unspecified.
 `;
   const analyzed = analyzeTrace(
     events.map((event) => JSON.stringify(event)).join("\n"),
@@ -81,9 +81,9 @@ test("trace analysis recognizes one concurrent outer stage and sanitized validat
 });
 
 test("finding extraction and expectation checks require three semantic themes", () => {
-  const text = `1. reconnect in src violates the product adapter boundary.
-2. catalog snapshot uses raw protocol beside versioned JSON.
-3. mobile bootstrap ZIP lacks runtime extraction.`;
+const text = `1. reconnect in src violates the product adapter boundary.
+2. mobile bootstrap ZIP lacks runtime extraction.
+3. mobile portability is uncertain because protocol uses the Buffer global but the runtime API is unspecified.`;
   const findings = numberedFindings(text);
   assert.equal(findings.length, 3);
   assert.equal(

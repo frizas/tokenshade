@@ -6,7 +6,7 @@ Replace bracketed benchmark values only with the committed public scorecard.
 
 Sol runs hot. Your workflow doesn't have to. 😎
 
-TokenShade helps Codex batch independent tools and stop burning model turns on
+TokenShade helps your coding agent batch independent tools and stop burning model turns on
 repetitive polling.
 
 Open source. No telemetry. A/B tested with a reproducible public fixture.
@@ -16,7 +16,7 @@ https://github.com/frizas/tokenshade
 ## X thread
 
 1. I kept seeing Codex spend a full model loop between tool calls that could
-   have run together. So I built TokenShade: stop the token burn on your plan.
+   have run together. So I built TokenShade: stop the burn on your plan.
 
 2. The rule is narrow: batch independent calls whose arguments are already
    known. Keep dependencies, exploration, approvals, writes, waits, and resumes
@@ -31,9 +31,9 @@ https://github.com/frizas/tokenshade
 5. No telemetry, backend, hooks, MCP server, credential reads, or runtime
    network client.
 
-6. The public benchmark is five matched Sol/XHigh A/B pairs on a fixed
-   eight-file fixture. Observed median: [PUBLIC SCORECARD]. Workload-specific,
-   not a universal promise.
+6. The public benchmark is five matched Sol/XHigh serial-control/TokenShade
+   pairs on a fixed eight-file fixture. Observed median: [PUBLIC SCORECARD].
+   This is a mechanism test, not a default-Sol comparison or universal promise.
 
 7. Repo, method, sanitized results, and portable Claude/Kimi prompts:
    https://github.com/frizas/tokenshade

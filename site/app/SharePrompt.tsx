@@ -1,0 +1,80 @@
+"use client";
+
+import { useState } from "react";
+
+const repositoryUrl = "https://github.com/frizas/tokenshade";
+
+export function SharePrompt({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const fallbackText = encodeURIComponent(`${text}\n\nTokenShade: ${repositoryUrl}`);
+
+  async function share() {
+    if (typeof navigator.share === "function") {
+      try {
+        await navigator.share({
+          title: "TokenShade",
+          text,
+          url: `${window.location.origin}/#prompt`,
+        });
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError") return;
+      }
+    }
+    setOpen((value) => !value);
+  }
+
+  async function copyLink() {
+    await navigator.clipboard.writeText(`${window.location.origin}/#prompt`);
+    setLinkCopied(true);
+    window.setTimeout(() => setLinkCopied(false), 1800);
+  }
+
+  return (
+    <div className="prompt-share">
+      <button
+        className="prompt-share-button"
+        type="button"
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={share}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M12 15V3m0 0L8 7m4-4 4 4M6 10H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-1"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="square"
+            strokeLinejoin="miter"
+          />
+        </svg>
+        <span>Share</span>
+      </button>
+      {open ? (
+        <div className="share-menu" role="menu" aria-label="Share TokenShade">
+          <a
+            role="menuitem"
+            href={`https://wa.me/?text=${fallbackText}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            WhatsApp
+          </a>
+          <a
+            role="menuitem"
+            href={`https://twitter.com/intent/tweet?text=${fallbackText}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            X
+          </a>
+          <button role="menuitem" type="button" onClick={copyLink}>
+            {linkCopied ? "Link copied" : "Copy link"}
+          </button>
+        </div>
+      ) : null}
+    </div>
+  );
+}

@@ -1,0 +1,43 @@
+{
+  "kind": "tokenshade-benchmark-preflight",
+  "schemaVersion": 1,
+  "date": "2026-07-27",
+  "result": "fail",
+  "description": "Unguided eight-file preflight before the public instruction-ablation prompt was finalized.",
+  "pairs": 5,
+  "model": "gpt-5.6-sol",
+  "reasoningEffort": "xhigh",
+  "sandbox": "read-only",
+  "baseline": {
+    "medianModelCycles": 2,
+    "medianTotalTokens": 114012,
+    "genuinelyGroupedRuns": 3
+  },
+  "treatment": {
+    "medianModelCycles": 2,
+    "medianTotalTokens": 95527,
+    "genuinelyGroupedRuns": 5
+  },
+  "reductions": {
+    "modelCyclesPercent": 0,
+    "totalTokensPercent": 16.21
+  },
+  "gate": {
+    "modelCyclesAtLeast30Percent": false,
+    "totalTokensAtLeast20Percent": false
+  },
+  "metadata": {
+    "fixtureCommit": "b9cd58bcd7ad473270957949f0a0c5623db7d1a7",
+    "fixtureTreeSha256": "e107c4b3b5c46829b0b4f8f1217fa245459fe70c8213c9d2e9b06db8a3225175",
+    "promptSha256": "e684e4744aedcbcce42d5e427c6fb3217008b12a0e117082614aab70733689d5",
+    "policySha256": "8c24d8aac9a5d409c018c1da982461827f38644ee8496ecdeea69c3ed27afce8",
+    "codexVersion": "codex-cli 0.144.1",
+    "nodeVersion": "v22.22.2",
+    "platform": "win32-x64"
+  },
+  "notes": [
+    "Sol grouped all eight reads without TokenShade in three of five baseline runs.",
+    "The conclusion vocabulary was revised after a fixture-only diagnostic showed the intended mobile Buffer portability risk.",
+    "This artifact is retained to prevent the failed preflight from being hidden or presented as a passing release benchmark."
+  ]
+}
