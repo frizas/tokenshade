@@ -119,6 +119,21 @@ assert.equal(
   true,
   "landing page is missing sitemap.xml",
 );
+for (const favicon of [
+  "favicon.svg",
+  "favicon.ico",
+  "favicon-32x32.png",
+  "apple-touch-icon.png",
+  "icon-192.png",
+  "icon-512.png",
+  "site.webmanifest",
+]) {
+  assert.equal(
+    fs.existsSync(path.join(root, "site", "public", favicon)),
+    true,
+    `landing page is missing ${favicon}`,
+  );
+}
 assert.deepEqual(
   fs.readFileSync(path.join(root, "AGENTS.md")),
   fs.readFileSync(path.join(root, "policy", "AGENTS.md")),

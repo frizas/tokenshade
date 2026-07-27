@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { sitePath } from "./sitePath";
 
-const title = "TokenShade for OpenAI Codex";
+const title = "TokenShade — Stop the burn on your plan";
 const description =
   "Stop the burn on your plan. TokenShade helps AI coding agents batch independent tools and avoid repetitive polling.";
 const siteUrl = new URL("https://tokenshade.vercel.app");
@@ -30,9 +31,24 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: sitePath("/favicon.svg"), type: "image/svg+xml" },
+      {
+        url: sitePath("/favicon-32x32.png"),
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+    shortcut: sitePath("/favicon.ico"),
+    apple: [
+      {
+        url: sitePath("/apple-touch-icon.png"),
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
+  manifest: sitePath("/site.webmanifest"),
   openGraph: {
     title,
     description,

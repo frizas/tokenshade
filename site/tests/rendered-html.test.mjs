@@ -28,7 +28,7 @@ test("server-renders the TokenShade landing page", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>TokenShade/);
+  assert.match(html, /<title>TokenShade — Stop the burn on your plan<\/title>/);
   const visibleText = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
   assert.match(visibleText, /Stop the burn on your plan\./);
   assert.match(visibleText, /Free forever · No tracking · Open source/);
@@ -90,6 +90,9 @@ test("keeps metadata, accessibility, and responsive contracts in source", async 
   assert.match(shadeDemo, /height="1254"/);
   assert.match(shadeDemo, /aria-pressed=\{shaded\}/);
   assert.match(layout, /summary_large_image/);
+  assert.match(layout, /favicon-32x32\.png/);
+  assert.match(layout, /apple-touch-icon\.png/);
+  assert.match(layout, /site\.webmanifest/);
   assert.match(layout, /ChatGPT Work/);
   assert.match(layout, /GPT-5\.6 Sol/);
   assert.match(layout, /https:\/\/tokenshade\.vercel\.app/);

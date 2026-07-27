@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
   <title id="title">TokenShade</title>
-  <desc id="desc">A smiling sun wearing sunglasses, drawn as one ink-color symbol on transparency.</desc>
+  <desc id="desc">An ink sun wearing sunglasses, with a cream face and transparent exterior.</desc>
+  <circle cx="512" cy="520" r="286" fill="#fff6e9"/>
   <g fill="#101820" stroke="#101820" stroke-linecap="round" stroke-linejoin="round">
     <g fill="none" stroke-width="52">
       <circle cx="512" cy="520" r="286"/>
