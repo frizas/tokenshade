@@ -30,6 +30,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
+  verification: {
+    google: "4-0I7YOqzhN-rwFDTYFzLPCJBGBlbNhM36e995Y8Me0",
+  },
   icons: {
     icon: [
       { url: sitePath("/favicon.svg"), type: "image/svg+xml" },

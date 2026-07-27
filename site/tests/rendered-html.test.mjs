@@ -112,6 +112,7 @@ test("keeps metadata, accessibility, analytics, and responsive contracts in sour
   assert.match(layout, /https:\/\/tokenshade\.vercel\.app/);
   assert.match(layout, /siteName: "TokenShade"/);
   assert.match(layout, /alt: "TokenShade — Stop the burn on your plan"/);
+  assert.match(layout, /google: "4-0I7YOqzhN-rwFDTYFzLPCJBGBlbNhM36e995Y8Me0"/);
   assert.match(page, /"@type": "WebSite"/);
   assert.match(page, /price: "0"/);
   assert.match(siteAnalytics, /G-XF80ZZLVB0/);
