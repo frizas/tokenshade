@@ -1,0 +1,21 @@
+Perform a read-only architecture investigation of this fixture.
+
+Inspect exactly these eight files and no other files:
+
+1. AGENTS.md
+2. docs/mobile-package.md
+3. docs/asset-install.md
+4. docs/visual-system.md
+5. src/protocol.mjs
+6. src/catalog.mjs
+7. src/render.mjs
+8. src/reconnect.mjs
+
+Do not modify anything. Do not search the tree, inspect Git history, run tests, or broaden the investigation.
+
+Return:
+
+1. One compact Markdown table with exactly eight rows, in the order above, with columns `Path`, `Role`, and `Key contract`.
+2. Exactly three concise cross-file findings or risks grounded in the eight inspected files.
+
+Mention every path in the table.

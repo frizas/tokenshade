@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "paths": [
+    "AGENTS.md",
+    "docs/mobile-package.md",
+    "docs/asset-install.md",
+    "docs/visual-system.md",
+    "src/protocol.mjs",
+    "src/catalog.mjs",
+    "src/render.mjs",
+    "src/reconnect.mjs"
+  ],
+  "findings": [
+    {
+      "id": "product-boundary",
+      "all": ["reconnect", "src"],
+      "any": ["product", "adapter", "boundary", "raybox"]
+    },
+    {
+      "id": "split-protocol",
+      "all": ["catalog", "snapshot"],
+      "any": ["raw", "version", "json", "envelope", "protocol"]
+    },
+    {
+      "id": "mobile-install-gap",
+      "all": ["mobile", "zip"],
+      "any": ["runtime", "install", "extract", "bootstrap", "archive"]
+    }
+  ]
+}

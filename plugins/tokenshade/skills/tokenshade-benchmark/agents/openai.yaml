@@ -1,0 +1,4 @@
+interface:
+  display_name: "TokenShade Benchmark"
+  short_description: "Run a reproducible batching comparison"
+  default_prompt: "Use $tokenshade-benchmark to run the matched local benchmark."

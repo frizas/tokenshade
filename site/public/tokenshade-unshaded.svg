@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">Unshaded sun</title>
+  <desc id="desc">A smiling sun without sunglasses, drawn in one ink color.</desc>
+  <g fill="#101820" stroke="#101820" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none" stroke-width="52">
+      <circle cx="512" cy="520" r="286"/>
+      <path d="M388 662c34 39 76 58 124 58s90-19 124-58"/>
+      <path d="M512 106v58M512 876v58M98 520h58M868 520h58M219 227l41 41M764 772l41 41M805 227l-41 41M260 772l-41 41"/>
+    </g>
+    <circle cx="420" cy="487" r="29" stroke="none"/>
+    <circle cx="604" cy="487" r="29" stroke="none"/>
+  </g>
+</svg>

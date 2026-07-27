@@ -1,0 +1,20 @@
+{
+  "name": "tokenshade",
+  "version": "0.1.0",
+  "description": "Stop the token burn on your plan.",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "tokenshade": "./plugins/tokenshade/scripts/tokenshade.mjs"
+  },
+  "scripts": {
+    "test": "node --test --test-concurrency=1 test/*.test.mjs",
+    "check": "node scripts/check-repository.mjs",
+    "benchmark": "node plugins/tokenshade/scripts/benchmark.mjs",
+    "summarize": "node plugins/tokenshade/scripts/tokenshade.mjs summarize"
+  }
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "TokenShade"
+  short_description: "Install and manage safer tool batching"
+  default_prompt: "Use $tokenshade to install or manage the batching policy."

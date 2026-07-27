@@ -1,0 +1,29 @@
+name: Benchmark report
+description: Share a reproducible, sanitized TokenShade comparison
+title: "[benchmark] "
+labels: ["benchmark"]
+body:
+  - type: markdown
+    attributes:
+      value: Share observed metrics only. Never upload raw prompts, credentials, private files, or personal session traces.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Model, effort, host, versions, fixture commit, and prompt hash.
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Matched method
+      description: Pair count, coverage gate, expected conclusions, and commands.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Sanitized results
+      render: json
+    validations:
+      required: true

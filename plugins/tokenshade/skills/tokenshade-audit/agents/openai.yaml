@@ -1,0 +1,4 @@
+interface:
+  display_name: "TokenShade Audit"
+  short_description: "Audit local Codex orchestration safely"
+  default_prompt: "Use $tokenshade-audit to summarize my local orchestration metrics."

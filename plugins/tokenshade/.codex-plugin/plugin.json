@@ -1,0 +1,39 @@
+{
+  "name": "tokenshade",
+  "version": "0.1.0",
+  "description": "Stop the token burn on your plan.",
+  "author": {
+    "name": "Frizas",
+    "url": "https://github.com/frizas"
+  },
+  "homepage": "https://github.com/frizas/tokenshade",
+  "repository": "https://github.com/frizas/tokenshade",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "agents",
+    "tool-batching",
+    "token-efficiency",
+    "open-source"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "TokenShade",
+    "shortDescription": "Batch independent tools. Poll long work less.",
+    "longDescription": "Installs a narrow Codex policy for grouping independent tool calls, audits aggregate local orchestration metrics, and runs reproducible before/after benchmarks.",
+    "developerName": "Frizas",
+    "category": "Productivity",
+    "capabilities": [],
+    "websiteURL": "https://github.com/frizas/tokenshade",
+    "privacyPolicyURL": "https://github.com/frizas/tokenshade/blob/main/PRIVACY.md",
+    "defaultPrompt": [
+      "Install the TokenShade policy safely.",
+      "Audit my local Codex orchestration.",
+      "Run the matched TokenShade benchmark."
+    ],
+    "brandColor": "#FF6B4A",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png"
+  }
+}

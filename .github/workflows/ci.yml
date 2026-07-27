@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.19.0"
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Validate TokenShade
+        run: |
+          npm test
+          npm run check
+          npm run benchmark -- --dry-run --json
+      - name: Install site dependencies
+        run: npm ci --prefix site --ignore-scripts --no-audit --no-fund
+      - name: Build and test site
+        run: npm test --prefix site

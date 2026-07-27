@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="360" viewBox="0 0 1400 360" role="img" aria-labelledby="title desc">
+  <title id="title">TokenShade</title>
+  <desc id="desc">TokenShade one-color cream wordmark on transparency.</desc>
+  <g transform="translate(24 -16) scale(.38)" fill="#FFF6E9" stroke="#FFF6E9" stroke-linecap="round" stroke-linejoin="round">
+    <g fill="none" stroke-width="52">
+      <circle cx="512" cy="520" r="286"/>
+      <path d="M388 662c34 39 76 58 124 58s90-19 124-58"/>
+      <path d="M512 106v58M512 876v58M98 520h58M868 520h58M219 227l41 41M764 772l41 41M805 227l-41 41M260 772l-41 41"/>
+    </g>
+    <path stroke="none" d="M270 420h220v58c0 88-45 136-110 136s-110-48-110-136zM534 420h220v58c0 88-45 136-110 136s-110-48-110-136z"/>
+    <rect x="474" y="420" width="76" height="42" rx="20" stroke="none"/>
+  </g>
+  <text x="440" y="224" fill="#FFF6E9" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="134" font-weight="800" letter-spacing="-6">TokenShade</text>
+</svg>

@@ -1,0 +1,8 @@
+.benchmark-work/
+coverage/
+node_modules/
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
